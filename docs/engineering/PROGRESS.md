@@ -1,25 +1,34 @@
 # Engineering progress
 
 - Current phase — Phase 0, Product & Engineering Readiness
-- Current checkpoint — CP-0.1, Design Baseline & Requirements Traceability
-- Status — In Progress
-- Lifecycle — Not Started → In Progress → Under Review → Accepted. Blocked is available when progress cannot continue. The project owner alone accepts checkpoints.
-
-| Task | Work recorded |
-| --- | --- |
-| 0.1.1 | Public organization repository, GitHub-generated README-only main commit, and dedicated checkpoint branch. |
-| 0.1.2 | Original DOCX and Markdown conversion with conversion record. |
-| 0.1.3 | Registry for 80 source FRs with release, checkpoint, test and criteria. |
-| 0.1.4 | 15 launch capabilities and cross-cutting controls. |
-| 0.1.5 | FR and NFR traceability with pending planned tests and release gates. |
-| 0.1.6 | Agent governance, templates, and ADR process. |
-| 0.1.7 | Proposed future engineering and quality standards. |
-| 0.1.8 | Open risks, decisions and research backlog. |
-
-## Review and evidence
-
+- Current checkpoint — CP-0.1
+- Status — Under Review
+- Lifecycle — Not Started → In Progress → Under Review → Accepted. Blocked is available when progress cannot continue. Only the project owner can accept a checkpoint.
 - Pull request — [Draft PR #1](https://github.com/riswan-labs/DestinaIQ/pull/1).
-- Verification evidence — The [baseline verifier](verify_baseline.py) passed. The DOCX matches the supplied file byte for byte (SHA-256 `2d831b2f36644b79fc32831d352f3b9548dd67324e3596bbb837c40cf599538c`). It verified 165 source blocks, 30 tables, all 80 FR IDs, criteria and release/checkpoint mappings, 15 launch mappings, 14 NFRs and 14 A?N mappings. All 1,719 internal links resolve. Automated implementation tests are pending.
-- Pending tasks and acceptance — Project-owner review and explicit checkpoint acceptance are pending.
-- Blockers — None recorded for documentation. Research and product decisions remain open.
-- Next authorized action — Await project-owner review. CP-0.2 and all subsequent checkpoints require separate authorization.
+- Documentation — Remediation complete and available in Draft PR #1.
+- Application implementation — Not Started.
+- Documentation verification — Passed byte-level DOCX and source transcription comparison, checkpoint and release-graph checks, bidirectional traceability and link verification. The verifier suite passed one unchanged-baseline case and 15 isolated negative cases.
+- Application automated verification — Pending.
+- Project-owner acceptance — Pending.
+- Outstanding decisions — [D20](../governance/DECISION_REGISTER.md#d20) covers the stated count. [D21](../governance/DECISION_REGISTER.md#d21) and [D22](../governance/DECISION_REGISTER.md#d22) cover release sequencing, gated scope and commercial decisions.
+- Next authorized action — Await independent project-owner review. CP-0.2 has not started.
+
+## Checkpoint inventory
+
+The 166 enumerated checkpoints replace the previous 25. Phases 0–6 contain 90 checkpoints; Phases 7–12 contain 76. The [roadmap](ROADMAP.md) contains individual dependencies, acceptance criteria and status. CP-0.1 is the only active checkpoint. All subsequent checkpoints are Not Started.
+
+| Phase | Count | Status |
+| --- | --- | --- |
+| 0 | 9 | 1 Under Review; 8 Not Started |
+| 1 | 11 | Not Started |
+| 2 | 12 | Not Started |
+| 3 | 15 | Not Started |
+| 4 | 14 | Not Started |
+| 5 | 15 | Not Started |
+| 6 | 14 | Not Started |
+| 7 | 11 | Not Started |
+| 8 | 14 | Not Started |
+| 9 | 13 | Not Started |
+| 10 | 14 | Not Started |
+| 11 | 11 | Not Started |
+| 12 | 13 | Not Started |

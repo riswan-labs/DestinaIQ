@@ -14,3 +14,5 @@
 - Next authorized action
 
 Record implementation evidence separately from documentation. Only the project owner can accept a checkpoint.
+
+Include the primary, supporting and verification checkpoint roles, target product release and customer availability boundary. List explicit exclusions and the owner authorization needed for any scope expansion. For substantial work, define independently reviewable draft PR slices with separate acceptance criteria. Record positive, negative and failure-path evidence, security scans, coverage applicability, and any architectural deviation. Leave acceptance pending until owner approval.

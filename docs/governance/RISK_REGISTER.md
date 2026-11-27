@@ -15,3 +15,7 @@ All risks are **Open**. Owner roles are proposed for confirmation. The [decision
 | R09 | Operational incidents without adequate response | Assign on-call and data owners and test restore, correction and escalation. | Engineering | D11, D14 |
 | R10 | Partner service, licensing or sensitive feature scope exceeds approval | Validate partner contracts, moderation and deferred controls separately. | Product and legal | D04, D08, D16, D17 |
 | R11 | Hallucination, untrusted input or inappropriate AI action | Verify source grounding, tool boundaries, abstention and action approval. | AI and security | D08, D13, D15 |
+
+| R12 | Cross-phase slices miss authoritative customer release gates | Sequence slices using explicit dependencies and verify release boundaries against the reconciliation table. | Product and engineering | D21, D22 |
+| R13 | Public repository exposes restricted data | Run required scans, use synthetic fixture data, review artifacts and route incidents privately. | Security | D19 |
+| R14 | Conflicting inventory total leads to silent scope removal | Keep all 166 enumerated IDs and obtain clarification before changing the inventory. | Project owner | D20 |

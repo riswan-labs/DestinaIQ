@@ -38,11 +38,11 @@ def source_paragraph(node):
     return "".join(parts)
 
 
-def source_documents():
+def source_documents(original_path=None):
     original = ROOT / "docs/product/design-v3.docx"
-    assert sha256(original.read_bytes()).hexdigest() == BASELINE_HASH
-    if len(sys.argv) == 2:
-        assert original.read_bytes() == Path(sys.argv[1]).read_bytes()
+    assert sha256(original.read_bytes()).hexdigest() == BASELINE_HASH, "Authoritative DOCX hash mismatch"
+    if original_path is not None:
+        assert original.read_bytes() == Path(original_path).read_bytes(), "Original DOCX differs"
     with ZipFile(original) as package:
         body = ET.fromstring(package.read("word/document.xml")).find(W + "body")
     design = read("docs/product/DESIGN.md").split("\n## Conversion record\n")[0]
@@ -112,64 +112,246 @@ def check_links():
                 continue
             target, _, anchor = unquote(link).partition("#")
             resolved = (path.parent / target).resolve() if target else path
-            assert resolved.is_file(), (path.relative_to(ROOT), link)
+            assert resolved.is_file(), f"Broken documentation link in {path.relative_to(ROOT)}: {link}"
             assert not anchor or anchor in anchors.get(resolved, set()), (path.relative_to(ROOT), link)
             total += 1
     print(f"{total} internal links and anchors resolve across {len(files)} Markdown files")
 
 
-def check_traceability(source, launches):
-    requirements = blocks(read("docs/product/REQUIREMENTS.md"), r"^## (FR-\d{3})$")
-    scope = blocks(read("docs/product/LAUNCH_SCOPE.md"), r"^## (L\d{2})$")
-    roadmap = read("docs/engineering/ROADMAP.md")
-    checkpoints = blocks(roadmap, r"^### (CP-\d+\.\d+)$")
-    release_strategy = read("docs/product/RELEASE_STRATEGY.md")
-    gates = blocks(release_strategy, r"^## Gate (V\d\.\d)$")
-    trace = read("docs/engineering/TRACEABILITY.md")
-    controls = blocks(trace, r"^### (NFR-\d{2})$")
-    assert set(requirements) == set(source) == {f"FR-{i:03}" for i in range(1, 81)}
-    assert len(gates) == 6 and len(controls) == 14
-    assert set(scope) == set(launches) == {f"L{i:02}" for i in range(1, 16)}
-    assert set(re.findall(r"^\| ([A-N]) \|", roadmap, re.M)) == set("ABCDEFGHIJKLMN")
-    assert set(re.findall(r"^## Phase (\d+) ", roadmap, re.M)) == set(map(str, range(13)))
-    release_counts = Counter()
-    dependency_graph = {}
-    for req, (title, release, criterion) in source.items():
-        section = requirements[req]
-        assert f"**{title}**" in section
-        assert f"- Acceptance criterion — {criterion}\n" in section
-        assert f"[Gate {release}]" in section and f"[{req}]" in gates[release]
-        checkpoint = re.search(r"- Implementation phase and checkpoint — Phase (\d+), \[(CP-\d+\.\d+)\]", section)
-        assert checkpoint and checkpoint[2].startswith(f"CP-{checkpoint[1]}.")
-        assert f"[{req}]" in checkpoints[checkpoint[2]]
-        assert f"TEST-{req}." in section and f"TEST-{req} pending" in trace
-        assert "- Status — Not Started" in section
-        assert re.search(r"^- Domain and priority — .+, P[0-3]", section, re.M)
-        deps = re.search(r"^- Dependencies — (.+)$", section, re.M)
-        assert deps
-        dependency_graph[req] = re.findall(r"\[(FR-\d{3})\]", deps[1])
-        assert all(dep in requirements for dep in dependency_graph[req])
-        release_counts[release] += 1
-    remaining = set(dependency_graph)
+CHECKPOINT_COUNTS = (9, 11, 12, 15, 14, 15, 14, 11, 14, 13, 14, 11, 13)
+CHECKPOINT_LINK = r"\[(CP-\d+\.\d+)\]"
+FR_LINK = r"\[(FR-\d{3})\]"
+NFR_LINK = r"\[(NFR-\d{2})\]"
+RELEASES = ("V1.0", "V1.1", "V1.2", "V1.3", "V2.0", "V3.0")
+
+
+def links(pattern, body):
+    return set(re.findall(pattern, body))
+
+
+def field(body, name):
+    values = re.findall(rf"^- {re.escape(name)} — (.+)$", body, re.M)
+    assert len(values) == 1, f"Missing or duplicate field {name}"
+    return values[0]
+
+
+def rows(markdown, expression):
+    parsed = {}
+    for line in markdown.splitlines():
+        cells = [value.strip() for value in line.strip("|").split("|")]
+        match = re.match(expression, cells[0])
+        if match:
+            key = match[1]
+            assert key not in parsed, f"Duplicate table entry {key}"
+            parsed[key] = cells
+    return parsed
+
+
+def check_dependencies(graph, label):
+    for node, dependencies in graph.items():
+        missing = dependencies - graph.keys()
+        assert not missing, f"Invalid {label} dependencies for {node}: {sorted(missing)}"
+    remaining = set(graph)
     while remaining:
-        resolved = {req for req in remaining if not remaining.intersection(dependency_graph[req])}
-        assert resolved, f"FR dependency cycle among {sorted(remaining)}"
-        remaining -= resolved
-    for launch, ids in launches.items():
-        mapping = set(re.findall(r"\[(FR-\d{3})\]", scope[launch].split("\n## ", 1)[0]))
-        assert mapping == ids, (launch, mapping, ids)
-        assert all(f"[{launch}]" in requirements[req] for req in ids)
-    for nfr, section in controls.items():
-        assert "- Acceptance — " in section and f"TEST-{nfr} pending" in section
-        checkpoint = re.search(r"\[(CP-\d+\.\d+)\]", section)[1]
-        assert f"[{nfr}]" in checkpoints[checkpoint]
-        assert any(f"[{nfr}]" in gate for gate in gates.values())
-    print(f"80 FRs, 80 unique IDs and 80 criteria, release and checkpoint assignments; {len(launches)} launch capabilities")
-    print(f"{len(controls)} NFRs, {len(checkpoints)} checkpoints, 13 phases, 14 A–N mappings; no missing references or FR dependency cycles")
+        ready = {node for node in remaining if not (graph[node] & remaining)}
+        assert ready, f"{label} dependency cycle among {sorted(remaining)}"
+        remaining -= ready
+
+
+def checkpoint_closure(graph, roots):
+    seen = set()
+    pending = set(roots)
+    while pending:
+        current = pending.pop()
+        seen.add(current)
+        pending.update(graph[current] - seen)
+    return seen
+
+
+def check_roadmap():
+    roadmap = read("docs/engineering/ROADMAP.md")
+    phases = blocks(roadmap, r"^## Phase (\d+) — .+$")
+    assert set(phases) == set(map(str, range(13))), "Expected all 13 engineering phases"
+    checkpoints = blocks(roadmap, r"^### (CP-\d+\.\d+)$")
+    exact_ids = [
+        f"CP-{phase}.{index}"
+        for phase, count in enumerate(CHECKPOINT_COUNTS)
+        for index in range(1, count + 1)
+    ]
+    assert list(checkpoints) == exact_ids, "Incorrect checkpoint counts, IDs or order"
+    inventory = [line.split("\t") for line in read("docs/engineering/CHECKPOINT_INVENTORY.tsv").splitlines()]
+    assert [key for key, _ in inventory] == exact_ids, "Supplied inventory IDs differ"
+    for key, title in inventory:
+        phase = key.split(".")[0].removeprefix("CP-")
+        assert f"### {key}\n" in phases[phase], f"Checkpoint outside its phase: {key}"
+        assert f"\n**{title}**\n" in checkpoints[key], f"Supplied title differs: {key}"
+    graph = {}
+    targets = {}
+    for key, body in checkpoints.items():
+        for heading in ("Objective", "Scope", "Exclusions", "Deliverables", "Acceptance criteria", "Exit gate"):
+            field(body, heading)
+        graph[key] = links(CHECKPOINT_LINK, field(body, "Dependencies"))
+        assert key == "CP-0.1" or graph[key], f"Missing dependencies for {key}"
+        targets[key] = links(r"(V\d\.\d)", field(body, "Target product release"))
+        assert targets[key] and targets[key] <= set(RELEASES), f"Invalid target release for {key}"
+    check_dependencies(graph, "Checkpoint")
+    crosswalk = rows(roadmap, r"^([A-N])$")
+    assert set(crosswalk) == set("ABCDEFGHIJKLMN"), "Incomplete A–N crosswalk"
+    for key, cells in crosswalk.items():
+        mapped = links(CHECKPOINT_LINK, cells[2])
+        assert mapped and mapped <= checkpoints.keys(), f"Invalid A–N mapping for {key}"
+    progress = read("docs/engineering/PROGRESS.md")
+    status = field(progress, "Status")
+    assert field(progress, "Current checkpoint") == "CP-0.1" and field(progress, "Current phase").startswith("Phase 0,")
+    assert status in {"In Progress", "Under Review"}, "CP-0.1 requires owner acceptance"
+    assert field(progress, "Project-owner acceptance") == "Pending."
+    assert field(progress, "Application implementation") == "Not Started."
+    assert field(progress, "Application automated verification") == "Pending."
+    assert field(progress, "Documentation verification").startswith(
+        "Passed" if status == "Under Review" else "Pending"
+    ), "Documentation verification conflicts with checkpoint status"
+    counts = rows(progress, r"^(\d+)$")
+    assert set(counts) == set(phases), "Progress tracker phase inventory differs"
+    for phase, expected in enumerate(CHECKPOINT_COUNTS):
+        phase_status = f"1 {status}; 8 Not Started" if phase == 0 else "Not Started"
+        assert counts[str(phase)][1:] == [str(expected), phase_status], f"Progress tracker mismatch in Phase {phase}"
+    for key, body in checkpoints.items():
+        expected = status if key == "CP-0.1" else "Not Started"
+        assert field(body, "Implementation status") == expected + ".", f"Incorrect implementation status for {key}"
+    print(f"{len(checkpoints)} unique checkpoints across 13 phases: {', '.join(map(str, CHECKPOINT_COUNTS))}")
+    print(f"{sum(CHECKPOINT_COUNTS[:7])} pre-launch phase entries, {sum(CHECKPOINT_COUNTS[7:])} post-launch phase entries")
+    print(f"{sum(map(len, graph.values()))} valid checkpoint dependency edges, no cycles, and all 14 A–N mappings")
+    return checkpoints, graph, targets
+
+
+def check_traceability(source, launches):
+    checkpoints, graph, targets = check_roadmap()
+    requirements = blocks(read("docs/product/REQUIREMENTS.md"), r"^## (FR-\d{3})$")
+    scope_doc = read("docs/product/LAUNCH_SCOPE.md")
+    scope = blocks(scope_doc.split("\n## Launch controls", 1)[0], r"^## (L\d{2})$")
+    gates = blocks(read("docs/product/RELEASE_STRATEGY.md"), r"^## Gate (V\d\.\d)$")
+    trace = read("docs/engineering/TRACEABILITY.md")
+    assert "All release gates are pending." in read("docs/product/RELEASE_STRATEGY.md")
+    controls = blocks(trace, r"^### (NFR-\d{2})$")
+    index = rows(trace.split("## Non-functional register")[0], r"^\[(FR-\d{3})\]")
+    recon = rows(read("docs/product/RELEASE_RECONCILIATION.md"), r"^\[(FR-\d{3})\]")
+    decisions = read("docs/governance/DECISION_REGISTER.md")
+    assert "## D19\n\n**Approved by the project owner.**" in decisions
+    assert all(f"## {decision}\n\n**Open.**" in decisions for decision in ("D20", "D21", "D22"))
+    assert set(requirements) == set(source) == {f"FR-{i:03}" for i in range(1, 81)}
+    assert set(index) == set(recon) == set(source), "Missing FR table mappings"
+    assert set(gates) == set(RELEASES)
+    assert set(controls) == {f"NFR-{i:02}" for i in range(1, 15)}
+    assert set(scope) == set(launches) == {f"L{i:02}" for i in range(1, 16)}
+    readiness = {}
+    for release, body in gates.items():
+        exits = links(CHECKPOINT_LINK, re.search(r"^Exit checkpoints (.+)$", body, re.M)[1])
+        assert exits and exits <= checkpoints.keys() and all(release in targets[c] for c in exits)
+        readiness[release] = checkpoint_closure(graph, exits)
+        for checkpoint in readiness[release]:
+            assert min(RELEASES.index(r) for r in targets[checkpoint]) <= RELEASES.index(release), (
+                f"{release} depends on later-release checkpoint {checkpoint}"
+            )
+        assert links(FR_LINK, body) == {req for req, (_, r, _) in source.items() if r == release}, (
+            f"Inconsistent release assignments in {release} gate"
+        )
+
+    roles = ("FR primary", "FR support", "FR verification", "NFR implementation", "NFR verification")
+    reverse = {cp: {role: set() for role in roles} for cp in checkpoints}
+    fr_dependencies = {}
+    release_counts = Counter()
+    mapped = {}
+    open_conflicts = {"FR-022", "FR-025", "FR-030", "FR-050", "FR-054", "FR-055", "FR-056"}
+    deferred = {f"FR-{n:03}" for n in range(67, 73)}
+    for req, (title, release, criterion) in source.items():
+        body = requirements[req]
+        assert f"**{title}**" in body and field(body, "Acceptance criterion") == criterion
+        assert links(r"\[Gate (V\d\.\d)\]", field(body, "Target release and gate")) == {release}, (
+            f"Inconsistent release assignment for {req}"
+        )
+        mapping = [
+            links(CHECKPOINT_LINK, field(body, name))
+            for name in ("Primary implementation", "Supporting implementation", "Verification checkpoint")
+        ]
+        primary, supporting, verification = mapping
+        assert len(primary) == len(verification) == 1 and supporting, f"Missing requirement mappings for {req}"
+        assert primary.isdisjoint(supporting), f"Repeated primary as supporting for {req}"
+        all_mapped = primary | supporting | verification
+        assert all_mapped <= checkpoints.keys(), f"Invalid checkpoint references for {req}"
+        assert all_mapped <= readiness[release], (
+            f"{req} mapped outside its {release} release gate: {sorted(all_mapped - readiness[release])}"
+        )
+        for role, group in zip(roles, mapping):
+            for checkpoint in group:
+                reverse[checkpoint][role].add(req)
+        mapped[req] = mapping
+        assert [links(CHECKPOINT_LINK, cell) for cell in index[req][2:5]] == mapping
+        assert index[req][5] == f"TEST-{req} pending" and f"[Gate {release}]" in index[req][6]
+        assert field(body, "Verification").startswith("Pending automated verification with ")
+        assert f"TEST-{req}." in field(body, "Verification")
+        assert field(body, "Status") == "Not Started"
+        assert re.search(r"^.+, P[0-3]", field(body, "Domain and priority"))
+        dependency = field(body, "Dependencies")
+        prerequisite_checkpoints = links(CHECKPOINT_LINK, dependency)
+        assert supporting <= prerequisite_checkpoints <= checkpoints.keys()
+        fr_dependencies[req] = links(FR_LINK, dependency)
+        assert recon[req][1] == recon[req][3] == release, f"Inconsistent reconciliation release for {req}"
+        assert links(CHECKPOINT_LINK, recon[req][2]) == primary and len(recon[req]) == 7
+        assert all(recon[req][4:])
+        if req in open_conflicts | deferred:
+            expected = "Open scheduling" if req in open_conflicts else "Open scope"
+            assert recon[req][6] == expected and "D21" in recon[req][5], f"Undocumented release conflict for {req}"
+        release_counts[release] += 1
+
+    check_dependencies(fr_dependencies, "FR")
+    for req, dependencies in fr_dependencies.items():
+        assert all(RELEASES.index(source[d][1]) <= RELEASES.index(source[req][1]) for d in dependencies), (
+            f"{req} depends on a later-release FR"
+        )
+    for launch, expected in launches.items():
+        body = scope[launch]
+        found = links(FR_LINK, body)
+        assert found == expected, f"Missing or incorrect launch capability mapping for {launch}"
+        assert all(source[req][1] == "V1.0" and f"[{launch}]" in requirements[req] for req in found)
+        delivery, verification = re.search(r"Delivery (.+)\. Verification (.+)\.", body).groups()
+        assert links(CHECKPOINT_LINK, delivery) == set().union(*(mapped[r][0] | mapped[r][1] for r in found))
+        assert links(CHECKPOINT_LINK, verification) == set().union(*(mapped[r][2] for r in found))
+    support = links(FR_LINK, scope_doc.split("## Launch controls", 1)[1].split("## Coverage", 1)[0])
+    assert support == {"FR-023", "FR-024", "FR-026", "FR-028", "FR-029"}
+    assert set().union(*launches.values(), support) == {r for r, (_, release, _) in source.items() if release == "V1.0"}
+
+    for req, body in controls.items():
+        field(body, "Acceptance")
+        assert f"TEST-{req} pending" in field(body, "Verification")
+        assert field(body, "Status") == "Not Started"
+        for role, name in zip(roles[3:], ("Implementation checkpoints", "Verification checkpoints")):
+            mapping = links(CHECKPOINT_LINK, field(body, name))
+            assert mapping and mapping <= checkpoints.keys(), f"Missing or invalid {req} {name}"
+            for checkpoint in mapping:
+                reverse[checkpoint][role].add(req)
+        linked_releases = links(r"\[Gate (V\d\.\d)\]", field(body, "Release gates"))
+        assert linked_releases and linked_releases == {
+            release for release, gate in gates.items() if req in links(NFR_LINK, gate)
+        }
+    for cp, assignments in reverse.items():
+        for role, expected in assignments.items():
+            pattern = FR_LINK if role in roles[:3] else NFR_LINK
+            assert links(pattern, field(checkpoints[cp], role)) == expected, (
+                f"Broken bidirectional mapping for {cp} {role}"
+            )
+
+    print("80 FRs with primary, supporting and verification mappings; 14 NFRs with implementation and verification mappings")
+    print("15 launch capabilities, six source release gates, seven open cross-phase FRs and six deferred scope FRs")
     print("Release counts " + ", ".join(f"{release}={count}" for release, count in sorted(release_counts.items())))
 
 
-if __name__ == "__main__":
-    reqs, launch_scope = source_documents()
-    check_traceability(reqs, launch_scope)
+def main():
+    if not __debug__:
+        raise SystemExit("Run the verification without Python optimization.")
+    source, launches = source_documents(sys.argv[1] if len(sys.argv) == 2 else None)
+    check_traceability(source, launches)
     check_links()
+
+
+if __name__ == "__main__":
+    main()
