@@ -18,8 +18,8 @@
 
 ## Review and evidence
 
-- Pull request — Pending publication.
+- Pull request — [Draft PR #1](https://github.com/riswan-labs/DestinaIQ/pull/1).
 - Verification evidence — The [baseline verifier](verify_baseline.py) passed. The DOCX matches the supplied file byte for byte (SHA-256 `2d831b2f36644b79fc32831d352f3b9548dd67324e3596bbb837c40cf599538c`). It verified 165 source blocks, 30 tables, all 80 FR IDs, criteria and release/checkpoint mappings, 15 launch mappings, 14 NFRs and 14 A?N mappings. All 1,719 internal links resolve. Automated implementation tests are pending.
-- Pending tasks and acceptance — Verify the checkpoint and publish the draft PR, then await owner review and explicit acceptance.
+- Pending tasks and acceptance — Project-owner review and explicit checkpoint acceptance are pending.
 - Blockers — None recorded for documentation. Research and product decisions remain open.
-- Next authorized action — Complete documentation verification and publish the draft PR. Subsequent checkpoints require separate authorization.
+- Next authorized action — Await project-owner review. CP-0.2 and all subsequent checkpoints require separate authorization.
