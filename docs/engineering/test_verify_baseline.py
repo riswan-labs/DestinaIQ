@@ -54,6 +54,13 @@ class BaselineVerificationTests(unittest.TestCase):
         self.edit(ROADMAP, "### CP-0.3\n", "### CP-0.2\n")
         self.reject("Duplicate registry headings")
 
+    def test_unauthorized_requirement_acceptance_change(self):
+        file = self.root / REQS
+        text = file.read_text(encoding="utf-8")
+        criterion = next(line for line in text.splitlines() if line.startswith("- Acceptance criterion — "))
+        self.edit(REQS, criterion, "- Acceptance criterion — Reviewed secondary research is sufficient.")
+        self.reject("Authoritative requirement differs for FR-001")
+
     def test_missing_requirement_mapping(self):
         self.edit(
             REQS,

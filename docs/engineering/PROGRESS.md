@@ -1,8 +1,9 @@
 # Engineering progress
 
 - Current phase — Phase 0, Product & Engineering Readiness
-- Current checkpoint — CP-0.2
-- Current checkpoint status — Accepted
+- Current checkpoint — CP-0.3
+- Current checkpoint status — Under Review
+- CP-0.2 status — Accepted
 - CP-0.1 status — Accepted
 - Lifecycle — Not Started → In Progress → Under Review → Accepted. Blocked is available when progress cannot continue. Only the project owner can accept a checkpoint.
 - Pull request — [PR #1](https://github.com/riswan-labs/DestinaIQ/pull/1).
@@ -15,7 +16,7 @@
 - Reviewed commit — bef820bbf3484c90acf260b724600b23cfb2c7e1.
 - Decisions — D20 and D21 approved. D01–D18 and D22 remain open, including D17 for deferred scope.
 - Final owner acceptance and merge authorization — Granted for PR #1 after required verification.
-- Next authorized action — Await the next owner assignment after the authorized PR #2 merge and synchronization. CP-0.3 has not started.
+- Next authorized action — Await independent owner review and authorization for primary fieldwork or a bounded baseline. CP-0.4 has not started.
 
 ## CP-0.2 owner acceptance
 
@@ -31,13 +32,21 @@ Under the [bounded research policy](../research/competitive-benchmark/METHODOLOG
 
 The owner accepted F01–F13 as planning dispositions. Specification or implementation authorization remains separate. D01 remains open for optional future competitive validation if a product decision requires it. The [follow-up register](../research/competitive-benchmark/FOLLOW_UP.md) assigns demand and customer value to CP-0.3, source feasibility and economics to CP-0.4, and privacy and safety to CP-0.8.
 
+## CP-0.3 secondary research and review entry
+
+- CP-0.3 primary interviews — 0.
+- CP-0.3 primary survey responses — 0.
+- CP-0.3 acceptance — Pending owner review.
+
+[Customer discovery](../research/customer-discovery/README.md) records 69 source records, 60 public observations, 12 segments, 15 pains, 15 launch assessments and 20 market entries. The owner authorized [D24](../governance/DECISION_REGISTER.md#d24) for bounded secondary acceptance with incomplete scores and zero primary research. The original roadmap criterion remains preserved. CP-0.3 awaits independent owner acceptance. Customer demand and willingness to pay remain unvalidated. The [primary research register](../research/customer-discovery/PRIMARY_RESEARCH_FOLLOW_UP.md) assigns readiness to CP-0.9 and actual evidence and owner approval to Phase 6 before public V1.0. CP-0.4 retains data feasibility and CP-0.8 retains privacy and safety.
+
 ## Checkpoint inventory
 
-The approved baseline contains 13 engineering phases and 166 checkpoints. Phases 0–6 contain 90 checkpoints; Phases 7–12 contain 76. The [roadmap](ROADMAP.md) contains individual dependencies, acceptance criteria and status. CP-0.1 is Accepted. CP-0.2 is Accepted. Two checkpoints are Accepted. All checkpoints from CP-0.3 onward are Not Started.
+The approved baseline contains 13 engineering phases and 166 checkpoints. Phases 0–6 contain 90 checkpoints; Phases 7–12 contain 76. The [roadmap](ROADMAP.md) contains individual dependencies, acceptance criteria and status. CP-0.1 is Accepted. CP-0.2 is Accepted. Two checkpoints are Accepted. CP-0.3 is Under Review. All checkpoints from CP-0.4 onward are Not Started.
 
 | Phase | Count | Status |
 | --- | --- | --- |
-| 0 | 9 | 2 Accepted; 7 Not Started |
+| 0 | 9 | 2 Accepted; 1 Under Review; 6 Not Started |
 | 1 | 11 | Not Started |
 | 2 | 12 | Not Started |
 | 3 | 15 | Not Started |

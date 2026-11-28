@@ -202,7 +202,19 @@ def check_roadmap():
         assert mapped and mapped <= checkpoints.keys(), f"Invalid A–N mapping for {key}"
     progress = read("docs/engineering/PROGRESS.md")
     status = field(progress, "CP-0.1 status")
-    research_status = field(progress, "Current checkpoint status")
+    current = field(progress, "Current checkpoint")
+    current_status = field(progress, "Current checkpoint status")
+    discovery_status = "Not Started"
+    research_status = current_status
+    if current == "CP-0.3":
+        discovery_status = current_status
+        research_status = field(progress, "CP-0.2 status")
+        assert research_status == "Accepted", "CP-0.3 requires accepted CP-0.2"
+        assert discovery_status in {"In Progress", "Blocked", "Under Review"}, "CP-0.3 has no acceptance authorization"
+        if discovery_status == "Under Review":
+            assert field(progress, "CP-0.3 primary interviews") == "0."
+            assert field(progress, "CP-0.3 primary survey responses") == "0."
+            assert field(progress, "CP-0.3 acceptance") == "Pending owner review."
     assert research_status in {"In Progress", "Blocked", "Under Review", "Accepted"}, "CP-0.2 has no acceptance authorization"
     if research_status in {"Under Review", "Accepted"}:
         benchmark = ROOT / "docs/research/competitive-benchmark"
@@ -216,7 +228,7 @@ def check_roadmap():
         assert field(progress, "CP-0.2 pull request") == "[PR #2](https://github.com/riswan-labs/DestinaIQ/pull/2)."
         assert field(progress, "CP-0.2 merge authorization") == "Granted for PR #2 after required verification."
         assert "[D23]" in field(progress, "Launch scope")
-    assert field(progress, "Current checkpoint") == "CP-0.2" and field(progress, "Current phase").startswith("Phase 0,")
+    assert current in {"CP-0.2", "CP-0.3"} and field(progress, "Current phase").startswith("Phase 0,")
     assert status == "Accepted", "CP-0.1 requires owner acceptance"
     assert field(progress, "Project-owner acceptance") == "Approved."
     assert field(progress, "Acceptance date") == "2026-11-27."
@@ -234,10 +246,10 @@ def check_roadmap():
     for phase, expected in enumerate(CHECKPOINT_COUNTS):
         phase_status = f"1 {status}; 1 {research_status}; 7 Not Started" if phase == 0 else "Not Started"
         if phase == 0 and research_status == "Accepted":
-            phase_status = "2 Accepted; 7 Not Started"
+            phase_status = "2 Accepted; 7 Not Started" if current == "CP-0.2" else f"2 Accepted; 1 {discovery_status}; 6 Not Started"
         assert counts[str(phase)][1:] == [str(expected), phase_status], f"Progress tracker mismatch in Phase {phase}"
     for key, body in checkpoints.items():
-        expected = {"CP-0.1": status, "CP-0.2": research_status}.get(key, "Not Started")
+        expected = {"CP-0.1": status, "CP-0.2": research_status, "CP-0.3": discovery_status}.get(key, "Not Started")
         assert field(body, "Implementation status") == expected + ".", f"Incorrect implementation status for {key}"
     print(f"{len(checkpoints)} unique checkpoints across 13 phases: {', '.join(map(str, CHECKPOINT_COUNTS))}")
     print(f"{sum(CHECKPOINT_COUNTS[:7])} pre-launch phase entries, {sum(CHECKPOINT_COUNTS[7:])} post-launch phase entries")
@@ -258,7 +270,15 @@ def check_traceability(source, launches):
     recon = rows(read("docs/product/RELEASE_RECONCILIATION.md"), r"^\[(FR-\d{3})\]")
     decisions = read("docs/governance/DECISION_REGISTER.md")
     decision_sections = blocks(decisions, r"^## (D\d{2})$")
-    assert set(decision_sections) == {"D19", "D20", "D21", "D22", "D23"}
+    expected_decisions = {"D19", "D20", "D21", "D22", "D23"}
+    progress = read("docs/engineering/PROGRESS.md")
+    if field(progress, "Current checkpoint") == "CP-0.3" and field(progress, "Current checkpoint status") == "Under Review":
+        expected_decisions.add("D24")
+        policy = decision_sections.get("D24", "")
+        assert policy.lstrip().startswith("**Approved by the project owner.**"), "Missing CP-0.3 policy authorization"
+        assert "02d8a39f017746d8aed5186b2f7ce240bbb1d63a" in policy, "Missing reviewed CP-0.3 baseline"
+        assert "[D24]" in progress, "CP-0.3 progress lacks policy reference"
+    assert set(decision_sections) == expected_decisions
     for decision in ("D19", "D20", "D21", "D23"):
         assert decision_sections[decision].lstrip().startswith("**Approved by the project owner.**"), (
             f"Incorrect approval status for {decision}"
@@ -312,7 +332,7 @@ def check_traceability(source, launches):
     deferred = {f"FR-{n:03}" for n in range(67, 73)}
     for req, (title, release, criterion) in source.items():
         body = requirements[req]
-        assert f"**{title}**" in body and field(body, "Acceptance criterion") == criterion
+        assert f"**{title}**" in body and field(body, "Acceptance criterion") == criterion, f"Authoritative requirement differs for {req}"
         assert links(r"\[Gate (V\d\.\d)\]", field(body, "Target release and gate")) == {release}, (
             f"Inconsistent release assignment for {req}"
         )

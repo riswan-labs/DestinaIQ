@@ -1,6 +1,6 @@
 # Validation backlog
 
-A.1 is **Accepted** under the owner-authorized bounded evidence policy. Outstanding validation is tracked in the benchmark follow-up register. See the [benchmark evidence and access limitations](competitive-benchmark/README.md). A.2–A.6 are **Not Started**. Each checkpoint requires separate approval. Track evidence and decisions in the [decision register](../governance/DECISION_REGISTER.md).
+A.1 is **Accepted** under the owner-authorized bounded evidence policy. Outstanding validation is tracked in the benchmark follow-up register. See the [benchmark evidence and access limitations](competitive-benchmark/README.md). A.2 is **Under Review** for its [secondary research package](customer-discovery/README.md), with primary research pending. A.3–A.6 are **Not Started**. Each checkpoint requires separate approval. Track evidence and decisions in the [decision register](../governance/DECISION_REGISTER.md).
 
 | Design V3 gate | Checkpoints | Research and evidence | Exit condition |
 | --- | --- | --- | --- |
@@ -12,3 +12,7 @@ A.1 is **Accepted** under the owner-authorized bounded evidence policy. Outstand
 | A.6 | [CP-0.9](../engineering/ROADMAP.md#cp-09) | Check name, domain and app-store availability and confirm launch scope. | Document clearance outcome and decision on entry to platform phase. |
 
 Source details are in [Design V3](../product/DESIGN.md#17-competitive-validation). Later gates revisit commercial, privacy, performance and coverage evidence before relevant product releases.
+
+## Customer discovery handoff
+
+A.2 remains outstanding for primary validation under [D24](../governance/DECISION_REGISTER.md#d24). Preserve 20–30 completed traveler interviews and the conditional exploratory target of 50–100 survey responses. [CP-0.9](../engineering/ROADMAP.md#cp-09) reviews readiness. [CP-6.7](../engineering/ROADMAP.md#cp-67) and [CP-6.11](../engineering/ROADMAP.md#cp-611) carry usability and rollout evidence. [CP-6.13](../engineering/ROADMAP.md#cp-613) applies when relevant. [CP-6.14](../engineering/ROADMAP.md#cp-614) requires owner review of actual evidence and explicit approval of limitations before public V1.0. See the [primary follow-up register](customer-discovery/PRIMARY_RESEARCH_FOLLOW_UP.md). A.3 carries the [market coverage gaps](customer-discovery/MARKET_COVERAGE.md) into CP-0.4.
