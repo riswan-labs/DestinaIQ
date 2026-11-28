@@ -75,7 +75,7 @@ Phases group engineering work by domain. Explicit dependencies determine executi
 - Acceptance criteria — Complete 20–30 traveler interviews and score all 20 candidate markets against coverage criteria.
 - Target product release — V1.0.
 - Exit gate — Record passing checkpoint evidence and obtain owner acceptance before dependent work.
-- Implementation status — Not Started.
+- Implementation status — Under Review.
 - FR primary — None directly assigned.
 - FR support — None directly assigned.
 - FR verification — None directly assigned.
