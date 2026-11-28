@@ -28,4 +28,4 @@ Calculate coverage = sum of scored weights. Normalized score = sum(weight × sco
 
 ## Review boundaries
 
-No primary research, outreach, purchases, tracking, or participant data collection. The secondary package may enter review. The roadmap retains the 20–30 interview acceptance criterion. The owner may authorize primary research or explicitly approve a bounded baseline; no policy change is assumed.
+No primary research, outreach, purchases, tracking, or participant data collection. The secondary package may enter review. The roadmap retains the 20–30 interview acceptance criterion. D24 authorizes a bounded secondary baseline with incomplete scores and zero primary research. Future fieldwork requires separate authorization and actual evidence must be reviewed before public V1.0.

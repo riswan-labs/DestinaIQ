@@ -1,6 +1,6 @@
 # Decision register
 
-D19, D20, D21 and D23 are **Approved by the project owner**. D01–D18 and D22 remain **Open**. The checkpoint indicates the planned decision point or first validation gate. Resolution requires evidence and recorded approval. Reservation and commercialization decisions are prepared during discovery and resolved at their respective gates.
+D19, D20, D21, D23 and D24 are **Approved by the project owner**. D01–D18 and D22 remain **Open**. The checkpoint indicates the planned decision point or first validation gate. Resolution requires evidence and recorded approval. Reservation and commercialization decisions are prepared during discovery and resolved at their respective gates.
 
 | ID | Decision | Required evidence | Checkpoint |
 | --- | --- | --- | --- |
@@ -62,3 +62,11 @@ Engineering phase ownership does not override Design V3 release assignments. Cro
 **Approved by the project owner.** Retain the existing 15 V1.0 launch capabilities without expansion as a planning decision, subject to subsequent customer discovery, data feasibility, licensing, cost, privacy and production-readiness validation. CP-0.2 acceptance on 2026-11-27 is based on the reviewed commit `cad78ba6e9b4019034010a3e7cf3bcbbf9abbd40` and the bounded preliminary evidence policy.
 
 The approved inventory remains 13 phases, 166 checkpoints (90 pre-launch and 76 post-launch), 80 FRs, 14 NFRs and 15 launch capabilities. Existing authoritative release assignments and acceptance criteria are preserved. F01–F13 are accepted as planning guidance. Formal specification changes and implementation require separate owner authorization. See [PR #2](https://github.com/riswan-labs/DestinaIQ/pull/2) and the [follow-up register](../research/competitive-benchmark/FOLLOW_UP.md).
+
+## D24
+
+**Approved by the project owner.** On 2026-11-27 the owner authorized a CP-0.3 acceptance-policy exception in the CP-0.3 Research Closure and Review Finalization assignment for [Draft PR #3](https://github.com/riswan-labs/DestinaIQ/pull/3), reviewed commit `02d8a39f017746d8aed5186b2f7ce240bbb1d63a`. CP-0.3 may be accepted as a bounded secondary research baseline with incomplete numerical scoring and without completed interviews or surveys. The original roadmap and acceptance criteria remain intact. CP-0.3 remains Under Review pending independent owner acceptance.
+
+Preserve 20–30 completed traveler interviews as an outstanding objective and 50–100 survey responses as an exploratory target subject to owner approval. No fieldwork is authorized by this decision. Carry readiness and risks to [CP-0.9](../engineering/ROADMAP.md#cp-09), then require the owner to review actual primary evidence and explicitly approve remaining research limitations before public V1.0 under [CP-6.14](../engineering/ROADMAP.md#cp-614). The [follow-up register](../research/customer-discovery/PRIMARY_RESEARCH_FOLLOW_UP.md) records the Phase 6 handoffs.
+
+The four [feasibility cohorts](../research/customer-discovery/LAUNCH_MARKET_RECOMMENDATIONS.md) are approved for research planning only. D02 and D03 remain open. D23, the authoritative requirements and release assignments, and the 15 launch capabilities are preserved. Formal specification changes and implementation require separate owner authorization.

@@ -38,7 +38,7 @@ The owner accepted F01–F13 as planning dispositions. Specification or implemen
 - CP-0.3 primary survey responses — 0.
 - CP-0.3 acceptance — Pending owner review.
 
-[Customer discovery package](../research/customer-discovery/README.md) contains 54 source records, 60 public observations, 12 segments, 15 pains, 15 launch assessments, 20 market entries and the drafted primary instruments. The roadmap requires 20–30 traveler interviews and scoring all 20 markets against coverage criteria. This review includes incomplete market scores and no primary research. Customer demand and willingness to pay are unvalidated. Proposed launch-market cohorts, prices and requirements impact remain pending. Follow-up assignments retain CP-0.4 data and CP-0.8 privacy/safety decisions.
+[Customer discovery](../research/customer-discovery/README.md) records 69 source records, 60 public observations, 12 segments, 15 pains, 15 launch assessments and 20 market entries. The owner authorized [D24](../governance/DECISION_REGISTER.md#d24) for bounded secondary acceptance with incomplete scores and zero primary research. The original roadmap criterion remains preserved. CP-0.3 awaits independent owner acceptance. Customer demand and willingness to pay remain unvalidated. The [primary research register](../research/customer-discovery/PRIMARY_RESEARCH_FOLLOW_UP.md) assigns readiness to CP-0.9 and actual evidence and owner approval to Phase 6 before public V1.0. CP-0.4 retains data feasibility and CP-0.8 retains privacy and safety.
 
 ## Checkpoint inventory
 

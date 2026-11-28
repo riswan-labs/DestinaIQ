@@ -13,3 +13,5 @@ Preserve Explorer free, Trip Pass USD 9.99–19.99, Plus USD 14.99/month, Pro US
 | Enterprise is uncertain | Later interviews with buyers, workflow/rights and procurement evidence required |
 
 [Pricing instrument](primary-research/PRICING_RESEARCH.md) handles price sensitivity and format testing. CP-0.4 should estimate source minimums, API and alert cost per monitored trip, storage, delivery, support, refunds, and free-tier subsidy. Later commercial decisions require observed price conversion and margin; no price or recurring plan is approved. [CP-0.2 pricing](../competitive-benchmark/PRICING_COMPARISON.md)
+
+CP-0.4 carries forward provider licensing and costs, monitoring cost per trip, infrastructure cost, and commercial feasibility. Published competitor prices and gross tourist visits are context. Qualified TAM, SAM and SOM and DestinaIQ willingness to pay remain unknown.

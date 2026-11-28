@@ -10,3 +10,16 @@
 **Preliminary wording to test** — Compare when and where to go, with dated destination facts you can check.
 
 Variants for neutral concept tests: “Find destinations that fit your dates”; “Compare places using dated weather and travel information”; “Check what changed before and during your trip”; “Build a route you can edit and verify.” Test unaided comprehension and preference against the respondent’s usual workflow. Product vision, mission and branding remain unchanged. [Concept cards](primary-research/CONCEPT_TESTING.md)
+
+## Additional variants for customer testing
+
+| Role | Variant |
+| --- | --- |
+| Brand tagline | Know the world before you go. |
+| V1.0 positioning | Know where to go, when to go and what to expect. |
+| Customer value proposition | Research, compare and plan your next trip with reliable, personalized destination intelligence. |
+| Trust proposition | Travel recommendations backed by transparent sources, current information and clearly communicated uncertainty. |
+| Long-term positioning | The travel intelligence operating system. |
+| Original research variant | Compare when and where to go, with dated destination facts you can check. |
+
+The approved brand and long-term vision are preserved. These variants await customer testing.

@@ -270,7 +270,15 @@ def check_traceability(source, launches):
     recon = rows(read("docs/product/RELEASE_RECONCILIATION.md"), r"^\[(FR-\d{3})\]")
     decisions = read("docs/governance/DECISION_REGISTER.md")
     decision_sections = blocks(decisions, r"^## (D\d{2})$")
-    assert set(decision_sections) == {"D19", "D20", "D21", "D22", "D23"}
+    expected_decisions = {"D19", "D20", "D21", "D22", "D23"}
+    progress = read("docs/engineering/PROGRESS.md")
+    if field(progress, "Current checkpoint") == "CP-0.3" and field(progress, "Current checkpoint status") == "Under Review":
+        expected_decisions.add("D24")
+        policy = decision_sections.get("D24", "")
+        assert policy.lstrip().startswith("**Approved by the project owner.**"), "Missing CP-0.3 policy authorization"
+        assert "02d8a39f017746d8aed5186b2f7ce240bbb1d63a" in policy, "Missing reviewed CP-0.3 baseline"
+        assert "[D24]" in progress, "CP-0.3 progress lacks policy reference"
+    assert set(decision_sections) == expected_decisions
     for decision in ("D19", "D20", "D21", "D23"):
         assert decision_sections[decision].lstrip().startswith("**Approved by the project owner.**"), (
             f"Incorrect approval status for {decision}"
@@ -324,7 +332,7 @@ def check_traceability(source, launches):
     deferred = {f"FR-{n:03}" for n in range(67, 73)}
     for req, (title, release, criterion) in source.items():
         body = requirements[req]
-        assert f"**{title}**" in body and field(body, "Acceptance criterion") == criterion
+        assert f"**{title}**" in body and field(body, "Acceptance criterion") == criterion, f"Authoritative requirement differs for {req}"
         assert links(r"\[Gate (V\d\.\d)\]", field(body, "Target release and gate")) == {release}, (
             f"Inconsistent release assignment for {req}"
         )

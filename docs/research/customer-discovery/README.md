@@ -10,3 +10,7 @@ CP-0.3 secondary research package for independent review. No primary interviews 
 - [Draft primary research plan](primary-research/RESEARCH_PLAN.md), [interview guide](primary-research/INTERVIEW_GUIDE.md), [survey](primary-research/CUSTOMER_SURVEY.md), [concept cards](primary-research/CONCEPT_TESTING.md), [pricing exercise](primary-research/PRICING_RESEARCH.md), [recruitment drafts](primary-research/RECRUITMENT_TEMPLATES.md), [participation notice](primary-research/PARTICIPATION_NOTICE.md), and [analysis template](primary-research/ANALYSIS_TEMPLATE.md)
 
 Use `python docs/research/customer-discovery/verify_discovery.py` to check the package. The engineering verifier checks authoritative baselines and all local documentation links.
+
+## Research closure
+
+The [market coverage register](MARKET_COVERAGE.md) accounts for all 20 candidates, and the [primary research follow-up](PRIMARY_RESEARCH_FOLLOW_UP.md) tracks the outstanding fieldwork and release gate. D24 authorizes a bounded secondary research baseline. CP-0.3 remains Under Review pending independent owner acceptance.

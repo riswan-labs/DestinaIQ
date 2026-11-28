@@ -64,7 +64,7 @@ class DiscoveryVerificationTests(unittest.TestCase):
         self.reject("Candidate market IDs differ")
 
     def test_unknown_treated_as_zero(self):
-        self.edit(MARKETS, "overseas collectivity\t1\tU\t4", "overseas collectivity\t1\t0\t4")
+        self.edit(MARKETS, "Sovereign city-state\t4\t3\tU", "Sovereign city-state\t4\t3\t0")
         self.reject("Unknown values must not contribute weight")
 
     def test_score_arithmetic(self):
@@ -86,6 +86,32 @@ class DiscoveryVerificationTests(unittest.TestCase):
     def test_unmapped_followup(self):
         self.edit("FOLLOW_UP.md", "[CP-0.8]", "[CP-99.1]")
         self.reject("Unknown reference in FOLLOW_UP.md")
+
+    def test_fabricated_primary_completion(self):
+        self.edit("PRIMARY_RESEARCH_FOLLOW_UP.md", "Completed primary interviews: 0.", "Completed primary interviews: 20.")
+        self.reject("Unverified primary research completion")
+
+    def test_unsupported_score_with_correct_arithmetic(self):
+        self.edit(MARKETS, "federation\tU\tU\tU\tU\tU\tU\tU\t0\tU\t0.00\t5.00",
+                  "federation\t1\tU\tU\tU\tU\tU\tU\t25\t1.00\t0.25\t4.00")
+        self.reject("Unsupported market score")
+
+    def test_market_approval(self):
+        self.edit(MARKETS, "\tStress\t", "\tApproved for launch\t")
+        self.reject("Unauthorized market cohort or launch approval")
+
+    def test_missing_followup_gate(self):
+        self.edit("PRIMARY_RESEARCH_FOLLOW_UP.md", "[CP-6.14]", "[CP-6.12]")
+        self.reject("Missing primary research follow-up obligation")
+
+    def test_unauthorized_checkpoint_acceptance(self):
+        self.edit("../../engineering/PROGRESS.md", "Current checkpoint status — Under Review", "Current checkpoint status — Accepted")
+        self.reject("Unauthorized CP-0.3 transition")
+
+    def test_owner_authorization_required(self):
+        decision = self.root / "../../governance/DECISION_REGISTER.md"
+        self.edit(decision, "## D24\n\n**Approved by the project owner.**", "## D24\n\n**Proposed.**")
+        self.reject("Missing closure owner authorization")
 
 
 if __name__ == "__main__":
