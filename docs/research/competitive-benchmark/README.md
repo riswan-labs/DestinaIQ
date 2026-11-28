@@ -1,6 +1,6 @@
 # Competitive product benchmark
 
-CP-0.2 is **Under Review** under the owner-authorized bounded research policy. The evidence supports a preliminary planning baseline. Full workflows, comparable product scoring, and owner acceptance remain open.
+CP-0.2 is **Accepted** under the owner-authorized bounded research policy. The evidence supports a preliminary planning baseline. Full workflows and comparable product scoring remain unverified.
 
 - [Executive summary](EXECUTIVE_SUMMARY.md), [methodology](METHODOLOGY.md), and [scenario inputs](SCENARIOS.md)
 - [Evidence register](EVIDENCE_REGISTER.tsv), [48 scenario outcomes](SCENARIO_RESULTS.tsv), and [weighted scorecard](SCORECARD.md)

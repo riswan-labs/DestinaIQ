@@ -1,6 +1,6 @@
 # Outstanding research and dispositions
 
-The bounded public pass closes evidence collection for the initial review. The following questions remain open. Checkpoint links indicate proposed validation homes. Each future activity still requires its own authorization.
+The bounded public pass closes evidence collection for the initial review. The following questions remain open. Checkpoint links indicate proposed validation homes. Each future activity still requires its own authorization. CP-0.3 covers customer problems, segments, launch-market fit, willingness to pay, differentiation and proactive monitoring demand. CP-0.4 covers provider availability, geography, freshness, provenance, licensing and redistribution, API and monitoring costs, parking and transport coverage. CP-0.8 covers privacy, safety safeguards, consent, sensitive information and uncertainty communication.
 
 | ID | Capability and scope | Existing evidence | Missing evidence | Restriction | Customer impact | V1.0 relevance | Follow-up checkpoint | Authorization or dependency | Disposition |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |

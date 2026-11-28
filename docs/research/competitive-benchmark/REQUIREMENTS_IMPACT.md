@@ -1,6 +1,6 @@
 # Requirements impact proposals
 
-All proposals remain **Pending owner approval**. Review dispositions below record research recommendations only. Formal specification changes require separate owner approval. Priority and complexity are research estimates and carry no release authorization. No FR, NFR, launch capability or checkpoint assignment was changed. Evidence IDs resolve through the [evidence register](EVIDENCE_REGISTER.tsv).
+The project owner accepted F01–F13 as planning dispositions under [D23](../../governance/DECISION_REGISTER.md#d23). Each Approval field tracks formal specification authorization, which remains **Pending owner approval**. Formal specification changes require separate owner approval. Priority and complexity are research estimates and carry no release authorization. No FR, NFR, launch capability or checkpoint assignment was changed. Evidence IDs resolve through the [evidence register](EVIDENCE_REGISTER.tsv).
 
 ## F01
 

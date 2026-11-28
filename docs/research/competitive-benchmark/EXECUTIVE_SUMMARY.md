@@ -1,6 +1,6 @@
 # Executive summary
 
-CP-0.2 is **Under Review** under the [owner-authorized bounded research policy](METHODOLOGY.md#owner-authorized-evidence-closure). The six-competitor, eight-scenario log has 48 combinations: **0 fully verified**, 8 partial hands-on, 18 documentation-only, 8 restricted, 14 untested. None of the additional controls completed all checks for a standardized scenario. This is a preliminary planning baseline.
+CP-0.2 is **Accepted** under the [owner-authorized bounded research policy](METHODOLOGY.md#owner-authorized-evidence-closure). The six-competitor, eight-scenario log has 48 combinations: **0 fully verified**, 8 partial hands-on, 18 documentation-only, 8 restricted, 14 untested. None of the additional controls completed all checks for a standardized scenario. This is a preliminary planning baseline.
 
 ## Verified observations
 
@@ -12,9 +12,9 @@ Sitata’s publicly illustrated alert, assistance and travel-buddy workflows are
 
 No overall competitor ranking is supported. Travel Intel’s score is limited to its observed climate source-transparency slices and covers a small fraction of possible scenario weight. No accuracy, latency or end-to-end product grade follows from that score. DestinaIQ is a planned product and has no hands-on score. [Weighted scorecard](SCORECARD.md)
 
-## Recommendation for owner review
+## Approved launch planning decision
 
-**Retain the existing 15 V1.0 launch capabilities without expansion.** The evidence supports keeping attributable destination facts, historical periods, uncertainty and official advisories central to V1.0. The 13 recorded dispositions concern research or potential refinements. Specification changes require their own approval. Customer demand, provider feasibility, licensing, unit economics and production readiness remain unvalidated. The launch recommendation awaits final owner acceptance of CP-0.2. [Requirements impact](REQUIREMENTS_IMPACT.md) · [Approved launch scope](../../product/LAUNCH_SCOPE.md)
+**Retain the existing 15 V1.0 launch capabilities without expansion.** The evidence supports keeping attributable destination facts, historical periods, uncertainty and official advisories central to V1.0. The 13 recorded dispositions concern research or potential refinements. Specification changes require their own approval. Customer demand, provider feasibility, licensing, unit economics and production readiness remain unvalidated. The project owner approved this planning decision under [D23](../../governance/DECISION_REGISTER.md#d23), subject to later discovery, licensing, cost, privacy and production-readiness validation. [Requirements impact](REQUIREMENTS_IMPACT.md) · [Approved launch scope](../../product/LAUNCH_SCOPE.md)
 
 ## Later validation
 

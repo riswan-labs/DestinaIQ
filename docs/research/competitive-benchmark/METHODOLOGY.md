@@ -30,4 +30,4 @@ Use synthetic trips only. Keep source references and paraphrased factual observa
 - Research cap — One bounded public pass, at most 90 minutes of active effort. No accounts, purchases, installation, vendor contact or restricted access.
 - Review entry — Complete scenario accounting, evidence-supported scoring, explicit incomplete coverage, all 13 dispositions, launch recommendation and designated follow-up. End-to-end competitors' restricted workflows are optional unless needed for a specific future decision.
 - Fully verified scenario — All specified inputs and material checks exercised with attributable evidence. The current log has no fully verified scenarios. Hands-on in the TSV means partial coverage only.
-- Owner acceptance — Pending. Review entry establishes a preliminary planning baseline.
+- Owner acceptance — Approved on 2026-11-27 for reviewed commit cad78ba6e9b4019034010a3e7cf3bcbbf9abbd40 in [PR #2](https://github.com/riswan-labs/DestinaIQ/pull/2). The accepted baseline is preliminary.

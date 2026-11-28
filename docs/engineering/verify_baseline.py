@@ -203,12 +203,19 @@ def check_roadmap():
     progress = read("docs/engineering/PROGRESS.md")
     status = field(progress, "CP-0.1 status")
     research_status = field(progress, "Current checkpoint status")
-    assert research_status in {"In Progress", "Blocked", "Under Review"}, "CP-0.2 has no acceptance authorization"
-    if research_status == "Under Review":
+    assert research_status in {"In Progress", "Blocked", "Under Review", "Accepted"}, "CP-0.2 has no acceptance authorization"
+    if research_status in {"Under Review", "Accepted"}:
         benchmark = ROOT / "docs/research/competitive-benchmark"
         methodology = (benchmark / "METHODOLOGY.md").read_text(encoding="utf-8")
         assert "Review policy authorization — CP-0.2 Evidence Closure and Review Finalization, project-owner assignment" in methodology
         assert (benchmark / "FOLLOW_UP.md").is_file()
+    if research_status == "Accepted":
+        assert field(progress, "CP-0.2 project-owner acceptance") == "Approved.", "Missing CP-0.2 owner approval"
+        assert field(progress, "CP-0.2 acceptance date") == "2026-11-27."
+        assert field(progress, "CP-0.2 reviewed commit") == "cad78ba6e9b4019034010a3e7cf3bcbbf9abbd40."
+        assert field(progress, "CP-0.2 pull request") == "[PR #2](https://github.com/riswan-labs/DestinaIQ/pull/2)."
+        assert field(progress, "CP-0.2 merge authorization") == "Granted for PR #2 after required verification."
+        assert "[D23]" in field(progress, "Launch scope")
     assert field(progress, "Current checkpoint") == "CP-0.2" and field(progress, "Current phase").startswith("Phase 0,")
     assert status == "Accepted", "CP-0.1 requires owner acceptance"
     assert field(progress, "Project-owner acceptance") == "Approved."
@@ -226,6 +233,8 @@ def check_roadmap():
     assert set(counts) == set(phases), "Progress tracker phase inventory differs"
     for phase, expected in enumerate(CHECKPOINT_COUNTS):
         phase_status = f"1 {status}; 1 {research_status}; 7 Not Started" if phase == 0 else "Not Started"
+        if phase == 0 and research_status == "Accepted":
+            phase_status = "2 Accepted; 7 Not Started"
         assert counts[str(phase)][1:] == [str(expected), phase_status], f"Progress tracker mismatch in Phase {phase}"
     for key, body in checkpoints.items():
         expected = {"CP-0.1": status, "CP-0.2": research_status}.get(key, "Not Started")
@@ -249,11 +258,12 @@ def check_traceability(source, launches):
     recon = rows(read("docs/product/RELEASE_RECONCILIATION.md"), r"^\[(FR-\d{3})\]")
     decisions = read("docs/governance/DECISION_REGISTER.md")
     decision_sections = blocks(decisions, r"^## (D\d{2})$")
-    assert set(decision_sections) == {"D19", "D20", "D21", "D22"}
-    for decision in ("D19", "D20", "D21"):
+    assert set(decision_sections) == {"D19", "D20", "D21", "D22", "D23"}
+    for decision in ("D19", "D20", "D21", "D23"):
         assert decision_sections[decision].lstrip().startswith("**Approved by the project owner.**"), (
             f"Incorrect approval status for {decision}"
         )
+    assert "Retain the existing 15 V1.0 launch capabilities without expansion" in decision_sections["D23"]
     assert decision_sections["D22"].lstrip().startswith("**Open.**")
     decision_rows = rows(decisions, r"^(D\d{2})$")
     assert set(decision_rows) == {f"D{i:02}" for i in range(1, 19)}

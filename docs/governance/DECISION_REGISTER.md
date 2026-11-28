@@ -1,6 +1,6 @@
 # Decision register
 
-D19, D20 and D21 are **Approved by the project owner**. D01–D18 and D22 remain **Open**. The checkpoint indicates the planned decision point or first validation gate. Resolution requires evidence and recorded approval. Reservation and commercialization decisions are prepared during discovery and resolved at their respective gates.
+D19, D20, D21 and D23 are **Approved by the project owner**. D01–D18 and D22 remain **Open**. The checkpoint indicates the planned decision point or first validation gate. Resolution requires evidence and recorded approval. Reservation and commercialization decisions are prepared during discovery and resolved at their respective gates.
 
 | ID | Decision | Required evidence | Checkpoint |
 | --- | --- | --- | --- |
@@ -56,3 +56,9 @@ Engineering phase ownership does not override Design V3 release assignments. Cro
 - Deliver a responsive web application first. Evaluate native iOS and Android separately at the distribution decision under D16 and D22.
 - Make cost metering, usage quotas and rate limiting mandatory launch controls as a planning recommendation. Validate their scope and thresholds at CP-0.4, CP-0.5 and CP-6.10. The design and thresholds remain subject to approval.
 - Enable payment processing and subscriptions only after unit economics are validated and D10 and D22 are approved. Validate provider licensing at CP-0.4, cloud selection at CP-0.5, and privacy obligations at CP-0.8 and CP-8.14.
+
+## D23
+
+**Approved by the project owner.** Retain the existing 15 V1.0 launch capabilities without expansion as a planning decision, subject to subsequent customer discovery, data feasibility, licensing, cost, privacy and production-readiness validation. CP-0.2 acceptance on 2026-11-27 is based on the reviewed commit `cad78ba6e9b4019034010a3e7cf3bcbbf9abbd40` and the bounded preliminary evidence policy.
+
+The approved inventory remains 13 phases, 166 checkpoints (90 pre-launch and 76 post-launch), 80 FRs, 14 NFRs and 15 launch capabilities. Existing authoritative release assignments and acceptance criteria are preserved. F01–F13 are accepted as planning guidance. Formal specification changes and implementation require separate owner authorization. See [PR #2](https://github.com/riswan-labs/DestinaIQ/pull/2) and the [follow-up register](../research/competitive-benchmark/FOLLOW_UP.md).

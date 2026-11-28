@@ -1,6 +1,6 @@
 # Validation backlog
 
-A.1 is **Under Review** under the owner-authorized bounded evidence policy. See the [benchmark evidence and access limitations](competitive-benchmark/README.md). A.2–A.6 are **Not Started**. Each checkpoint requires separate approval. Track evidence and decisions in the [decision register](../governance/DECISION_REGISTER.md).
+A.1 is **Accepted** under the owner-authorized bounded evidence policy. Outstanding validation is tracked in the benchmark follow-up register. See the [benchmark evidence and access limitations](competitive-benchmark/README.md). A.2–A.6 are **Not Started**. Each checkpoint requires separate approval. Track evidence and decisions in the [decision register](../governance/DECISION_REGISTER.md).
 
 | Design V3 gate | Checkpoints | Research and evidence | Exit condition |
 | --- | --- | --- | --- |

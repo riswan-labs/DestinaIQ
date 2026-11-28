@@ -60,7 +60,8 @@ def verify(root=ROOT):
     repo = root.parents[2]
     methodology = read(root, "METHODOLOGY.md")
     assert "Review policy authorization — CP-0.2 Evidence Closure and Review Finalization, project-owner assignment" in methodology, "Missing owner review policy authorization"
-    assert "at most 90 minutes" in methodology and "Owner acceptance — Pending." in methodology
+    assert "at most 90 minutes" in methodology
+    assert "Owner acceptance — Approved on 2026-11-27 for reviewed commit cad78ba6e9b4019034010a3e7cf3bcbbf9abbd40 in [PR #2]" in methodology
     weight_rows = re.findall(r"^\| ([^|]+?) \| (\d+)% \|", methodology, re.M)
     assert unique([name for name, _ in weight_rows], "dimension") == set(DIMENSIONS.values())
     weights = {name: int(weight) for name, weight in weight_rows}
@@ -161,6 +162,7 @@ def verify(root=ROOT):
         assert len(re.findall(r"^- Review disposition — \S.+$", section, re.M)) == 1, "Missing research disposition"
         assert re.findall(r"^- Approval — (.+)$", section, re.M) == ["Pending owner approval."], "Finding prematurely approved"
     counts = sum(coverage.values(), Counter())
+    assert len(evidence) == 46 and tuple(counts[s] for s in OUTCOMES) == (8, 18, 8, 14), "Accepted evidence coverage changed"
     executive = read(root, "EXECUTIVE_SUMMARY.md")
     coverage_text = (
         f"{counts['Hands-on']} partial hands-on, {counts['Documentation-only']} documentation-only, "

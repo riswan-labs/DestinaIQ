@@ -136,12 +136,22 @@ class BaselineVerificationTests(unittest.TestCase):
         self.reject("V1.0 depends on later-release checkpoint CP-5.4")
 
     def test_unauthorized_progress(self):
-        for status in ("In Progress", "Blocked", "Under Review"):
-            field = f"- Implementation status — {status}."
-            if field in (self.root / ROADMAP).read_text(encoding="utf-8"):
-                self.edit(ROADMAP, field, "- Implementation status — Accepted.")
-                break
+        file = self.root / ROADMAP
+        before = file.read_text(encoding="utf-8")
+        head, checkpoint, tail = before.partition("### CP-0.2\n")
+        after = tail.replace("- Implementation status — Accepted.", "- Implementation status — Under Review.", 1)
+        self.assertNotEqual(after, tail)
+        file.write_text(head + checkpoint + after, encoding="utf-8")
         self.reject("Incorrect implementation status for CP-0.2")
+
+    def test_cp02_acceptance_requires_owner_approval(self):
+        self.edit(
+            "docs/engineering/PROGRESS.md",
+            "CP-0.2 project-owner acceptance — Approved.",
+            "CP-0.2 project-owner acceptance — Pending.",
+        )
+        self.reject("Missing CP-0.2 owner approval")
+
 
 
 if __name__ == "__main__":
