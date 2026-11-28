@@ -1,0 +1,166 @@
+CP-0.1	Design baseline and requirements traceability
+CP-0.2	Hands-on competitive benchmarking
+CP-0.3	Customer discovery and launch-market validation
+CP-0.4	Data provider feasibility, licensing and cost analysis
+CP-0.5	Technology stack and cloud provider selection
+CP-0.6	Repository structure and engineering governance
+CP-0.7	Architecture Decision Records
+CP-0.8	Threat model and privacy impact assessment
+CP-0.9	Launch backlog and implementation readiness review
+CP-1.1	Monorepo initialization and development environment
+CP-1.2	Backend application framework and configuration
+CP-1.3	PostgreSQL, PostGIS and pgvector integration
+CP-1.4	Database migrations and transaction management
+CP-1.5	API contracts, versioning and error handling
+CP-1.6	Authentication, authorization and user isolation
+CP-1.7	Background workers and asynchronous job processing
+CP-1.8	Object storage, caching and secrets management
+CP-1.9	Logging, metrics, tracing and health checks
+CP-1.10	CI/CD, dependency scanning and infrastructure as code
+CP-1.11	Integration testing and foundation acceptance review
+CP-2.1	Canonical destination ontology
+CP-2.2	Geographic entities and administrative relationships
+CP-2.3	Coordinates, boundaries and spatial queries
+CP-2.4	Destination aliases and multilingual names
+CP-2.5	Entity resolution and duplicate prevention
+CP-2.6	Source registry and evidence provenance
+CP-2.7	Temporal facts and historical versioning
+CP-2.8	Geographic data ingestion connectors
+CP-2.9	Destination search and relevance ranking
+CP-2.10	Destination knowledge APIs
+CP-2.11	Geographic coverage and data quality framework
+CP-2.12	Knowledge platform acceptance review
+CP-3.1	Connector framework and ingestion contracts
+CP-3.2	Raw data storage and ingestion auditing
+CP-3.3	Scheduling, retries and dead-letter processing
+CP-3.4	Normalization and data quality validation
+CP-3.5	Historical climate intelligence
+CP-3.6	Weather forecast intelligence
+CP-3.7	Tourism seasonality and travel-window recommendations
+CP-3.8	Official travel advisory intelligence
+CP-3.9	Destination news ingestion and deduplication
+CP-3.10	Attractions and activity intelligence
+CP-3.11	Airport, transportation and basic parking guidance
+CP-3.12	Practical local travel information
+CP-3.13	Data freshness and conflict detection
+CP-3.14	Source health monitoring and cost controls
+CP-3.15	Launch destination coverage review
+CP-4.1	Design system and application shell
+CP-4.2	Responsive navigation and accessibility
+CP-4.3	Destination search and discovery experience
+CP-4.4	Destination overview pages
+CP-4.5	Weather and climate visualization
+CP-4.6	Seasonality and best-time-to-visit experience
+CP-4.7	Safety advisory and destination news interfaces
+CP-4.8	Attractions and activity exploration
+CP-4.9	Airport, transportation and practical travel information
+CP-4.10	Destination comparison engine and interface
+CP-4.11	User profiles and preferences
+CP-4.12	Saved destinations and trip workspace
+CP-4.13	SEO and public destination pages
+CP-4.14	End-to-end consumer application testing
+CP-5.1	LLM provider abstraction and model configuration
+CP-5.2	Retrieval and evidence selection
+CP-5.3	Structured AI outputs and schema validation
+CP-5.4	Destination question-answering workflow
+CP-5.5	Personalized travel-window recommendations
+CP-5.6	Basic itinerary generation
+CP-5.7	Itinerary constraint validation
+CP-5.8	Saved-trip monitoring
+CP-5.9	Destination event relevance engine
+CP-5.10	Weekly destination briefing generation
+CP-5.11	Critical event notification delivery
+CP-5.12	Notification preferences and deduplication
+CP-5.13	AI security, prompt injection and hallucination defenses
+CP-5.14	AI evaluation framework
+CP-5.15	AI and proactive intelligence acceptance review
+CP-6.1	Functional requirements traceability audit
+CP-6.2	Cross-component integration testing
+CP-6.3	Performance and load testing
+CP-6.4	Security assessment and penetration testing
+CP-6.5	Privacy compliance and data deletion verification
+CP-6.6	Backup and disaster recovery exercises
+CP-6.7	Accessibility and usability assessment
+CP-6.8	Data accuracy and geographic coverage audit
+CP-6.9	AI evaluation and adversarial testing
+CP-6.10	Infrastructure cost and unit economics validation
+CP-6.11	Production deployment and operational runbooks
+CP-6.12	Private alpha release
+CP-6.13	Controlled public beta
+CP-6.14	Defect remediation and release approval
+CP-7.1	Interactive seasonal world atlas
+CP-7.2	Climate-preference destination discovery
+CP-7.3	Air quality and environmental intelligence
+CP-7.4	Activity-specific seasonal intelligence
+CP-7.5	Explainable destination suitability ranking
+CP-7.6	Destination cost intelligence
+CP-7.7	What-If Simulator
+CP-7.8	Personalized packing recommendations
+CP-7.9	Travel Readiness Center
+CP-7.10	Nationality-specific entry and visa intelligence
+CP-7.11	Advanced itinerary optimization
+CP-8.1	Reservation domain model
+CP-8.2	Manual reservation management
+CP-8.3	Secure booking confirmation uploads
+CP-8.4	Reservation extraction and validation
+CP-8.5	Forwarded email ingestion
+CP-8.6	Flight status provider integration
+CP-8.7	Temporal trip dependency graph
+CP-8.8	Travel Digital Twin
+CP-8.9	Cascading disruption analysis
+CP-8.10	Adaptive itinerary recommendations
+CP-8.11	Dynamic daily briefings
+CP-8.12	Offline destination and trip guides
+CP-8.13	Exportable intelligence reports
+CP-8.14	Reservation privacy and cost acceptance review
+CP-9.1	Neighborhood ontology and boundaries
+CP-9.2	Local intelligence coverage assessment
+CP-9.3	Geospatial incident mapping
+CP-9.4	Historical safety and incident intelligence
+CP-9.5	Neighborhood-level assessments
+CP-9.6	Know Your Stay accommodation intelligence
+CP-9.7	Local scam intelligence
+CP-9.8	Parking facility discovery
+CP-9.9	Parking prices and regulations
+CP-9.10	Airport and accessible parking intelligence
+CP-9.11	Parking-aware driving itineraries
+CP-9.12	Live parking availability where supported
+CP-9.13	Geographic accuracy and safety evaluation
+CP-10.1	Creator profiles and content ownership
+CP-10.2	Location-linked travel experiences
+CP-10.3	Creator video integration
+CP-10.4	Traveler-reported expense intelligence
+CP-10.5	Community reporting and moderation
+CP-10.6	Verified provider registry
+CP-10.7	Provider credential verification
+CP-10.8	Confirmed-trip reviews
+CP-10.9	Transparent provider pricing
+CP-10.10	Travel Circle and shared itineraries
+CP-10.11	Voluntary check-ins and consent controls
+CP-10.12	Insurance partner integrations
+CP-10.13	Medical and emergency assistance partnerships
+CP-10.14	Creator monetization infrastructure
+CP-11.1	Subscription and entitlement architecture
+CP-11.2	Trip Pass lifecycle
+CP-11.3	Payment processing and billing
+CP-11.4	Usage metering and cost attribution
+CP-11.5	Affiliate tracking and attribution
+CP-11.6	Marketplace commercial integrations
+CP-11.7	Enterprise API gateway
+CP-11.8	Organization and enterprise access management
+CP-11.9	API quotas and commercial contracts
+CP-11.10	Revenue and product analytics
+CP-11.11	Commercial security and compliance review
+CP-12.1	Advanced temporal knowledge analytics
+CP-12.2	Predictive destination intelligence
+CP-12.3	Historical travel disruption modeling
+CP-12.4	Advanced multi-objective recommendations
+CP-12.5	Multi-agent travel orchestration
+CP-12.6	Partner-operated rebooking assistance
+CP-12.7	Internationalization and multilingual intelligence
+CP-12.8	Global destination coverage expansion
+CP-12.9	Multi-region infrastructure
+CP-12.10	Large-scale data processing optimization
+CP-12.11	Enterprise intelligence products
+CP-12.12	Advanced privacy-preserving personalization
+CP-12.13	Continuous platform maturity assessment
