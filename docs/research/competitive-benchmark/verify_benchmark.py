@@ -59,6 +59,8 @@ def scorecard_rows(text):
 def verify(root=ROOT):
     repo = root.parents[2]
     methodology = read(root, "METHODOLOGY.md")
+    assert "Review policy authorization — CP-0.2 Evidence Closure and Review Finalization, project-owner assignment" in methodology, "Missing owner review policy authorization"
+    assert "at most 90 minutes" in methodology and "Owner acceptance — Pending." in methodology
     weight_rows = re.findall(r"^\| ([^|]+?) \| (\d+)% \|", methodology, re.M)
     assert unique([name for name, _ in weight_rows], "dimension") == set(DIMENSIONS.values())
     weights = {name: int(weight) for name, weight in weight_rows}
@@ -77,7 +79,7 @@ def verify(root=ROOT):
     evidence = {row["evidence_id"]: row for row in evidence_rows}
     impact = read(root, "REQUIREMENTS_IMPACT.md")
     findings = unique(headings(impact, r"F\d{2}"), "finding ID")
-    assert findings
+    assert findings == {f"F{i:02}" for i in range(1, 14)}
     for row in evidence_rows:
         assert row["competitor"] in COMPETITORS and re.fullmatch(row["competitor"] + r"\d{2}", row["evidence_id"])
         assert row["classification"] in EVIDENCE_CLASSES and row["source_url"].startswith("https://")
@@ -156,6 +158,7 @@ def verify(root=ROOT):
         refs = set(re.search(r"^- Evidence — (.+)\.$", section, re.M)[1].split(","))
         assert refs and refs <= ids, "Unknown finding evidence"
         assert all(finding in evidence[ref]["claim_ids"].split(",") for ref in refs)
+        assert len(re.findall(r"^- Review disposition — \S.+$", section, re.M)) == 1, "Missing research disposition"
         assert re.findall(r"^- Approval — (.+)$", section, re.M) == ["Pending owner approval."], "Finding prematurely approved"
     counts = sum(coverage.values(), Counter())
     executive = read(root, "EXECUTIVE_SUMMARY.md")
@@ -163,6 +166,19 @@ def verify(root=ROOT):
         f"{counts['Hands-on']} partial hands-on, {counts['Documentation-only']} documentation-only, "
         f"{counts['Restricted']} restricted, {counts['Untested']} untested"
     )
+    assert "0 fully verified" in executive and "Retain the existing 15 V1.0 launch capabilities without expansion" in executive
+    follow_up = read(root, "FOLLOW_UP.md")
+    follow_rows = re.findall(r"^\| (Q\d{2}) \| (.+) \|$", follow_up, re.M)
+    assert len(unique([key for key, _ in follow_rows], "follow-up ID")) >= 8, "Missing follow-up records"
+    for _, cells in follow_rows:
+        fields = cells.split(" | ")
+        assert len(fields) == 9 and all(fields)
+        assert set(re.findall(r"\bS\d{2}\b", fields[0])) <= scenarios
+        assert re.search(r"\bS\d{2}\b", fields[0])
+        refs = set(re.findall(r"\b(?:TI|TG|AU|SI|WP|OR)\d{2}\b", fields[1]))
+        assert refs and refs <= ids, "Unknown follow-up evidence"
+        assert re.search(r"\[CP-\d+\.\d+\]", fields[6])
+    assert all(f"[{cp}]" in follow_up for cp in ("CP-0.3", "CP-0.4", "CP-0.8"))
     assert coverage_text in executive, "Executive coverage differs from the log"
     print(f"{len(COMPETITORS)} competitors, {len(scenarios)} scenarios, {len(results)} pairs; {coverage_text}")
     print(f"{len(evidence)} evidence records, {len(matrix)} capability rows, {len(findings)} proposals, {len(scores)} scored slices")

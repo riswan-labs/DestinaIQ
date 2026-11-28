@@ -57,7 +57,7 @@ class BenchmarkVerificationTests(unittest.TestCase):
         self.reject("Incomplete scenario grid")
 
     def test_missing_evidence(self):
-        self.replace(RESULTS, "TI03,TI11\t", "TI03,TI99\t")
+        self.replace(RESULTS, "TI03,TI11,TI02,TI15\t", "TI03,TI99\t")
         self.reject("Unknown scenario evidence")
 
     def test_untested_zero(self):
@@ -78,12 +78,22 @@ class BenchmarkVerificationTests(unittest.TestCase):
         self.reject("Weights must total 100%")
 
     def test_incorrect_weighted_result(self):
-        self.replace("SCORECARD.md", "30/800 | 100.0%", "30/800 | 99.0%")
+        self.replace("SCORECARD.md", "40/800 | 100.0%", "40/800 | 99.0%")
         self.reject("Weighted summary does not reproduce")
 
     def test_premature_approval(self):
         self.replace("REQUIREMENTS_IMPACT.md", "Approval — Pending owner approval.", "Approval — Approved.")
         self.reject("Finding prematurely approved")
+
+    def test_missing_review_policy_authorization(self):
+        self.replace("METHODOLOGY.md", "project-owner assignment", "unattributed assignment")
+        self.reject("Missing owner review policy authorization")
+
+    def test_missing_follow_up_disposition(self):
+        file = self.root / "FOLLOW_UP.md"
+        lines = file.read_text(encoding="utf-8").splitlines()
+        file.write_text("\n".join(line for line in lines if not line.startswith("| Q01 |")) + "\n", encoding="utf-8")
+        self.reject("Missing follow-up records")
 
     def test_bad_requirement(self):
         self.replace("CAPABILITY_MATRIX.tsv", "FR-001,FR-002,FR-003", "FR-001,FR-002,FR-999")

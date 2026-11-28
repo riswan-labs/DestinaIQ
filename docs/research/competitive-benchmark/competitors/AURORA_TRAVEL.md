@@ -18,4 +18,4 @@ The signed-out web onboarding rendered. The app shell initially required JavaScr
 
 Vendor download page says free download. Paid plans, terms by geography, paid trials and revenue model not established. No service-specific privacy policy verified in this pass; location-alert permission is a vendor representation.
 
-Evidence AU01, AU02, AU03, AU04–AU06. See the [scenario log](../SCENARIO_RESULTS.tsv) and [pricing comparison](../PRICING_COMPARISON.md).
+Evidence AU01, AU02, AU03, AU04–AU07. See the [scenario log](../SCENARIO_RESULTS.tsv) and [pricing comparison](../PRICING_COMPARISON.md).

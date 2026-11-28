@@ -21,3 +21,13 @@ Evidence labels are **Hands-on verified**, **Official documentation verified**, 
 Weights are listed above. Normalized percent is 100 × sum(weight × score) / (5 × sum(eligible weight)). Use one decimal place. No eligible weight means N/A. Record the denominator and scored evidence coverage. Do not rank across products unless the same scenario tasks, same tier conditions and same dimension set are eligible with at least 70% weight for each product; a restricted or untested task cannot be scored as zero. An observed feature without comparable end-to-end evidence may be used qualitatively.
 
 Use synthetic trips only. Keep source references and paraphrased factual observations. No vendor images or copied product outputs beyond short factual fields. The [register](EVIDENCE_REGISTER.tsv) records UTC observation times, surfaces and limitations. The approved source method is [Design V3 §17](../../product/DESIGN.md#17-competitive-validation).
+
+
+## Owner-authorized evidence closure
+
+- Review policy authorization — CP-0.2 Evidence Closure and Review Finalization, project-owner assignment following review of b3f72328469172b425645af10a132f3fbafc239f.
+- Research elapsed — 2026-11-28 00:42:14–00:45:08 UTC (2 minutes, 54 seconds wall-clock upper bound for active research; parallel observations counted once). Local research date 2026-11-27 in America/Los_Angeles.
+- Research cap — One bounded public pass, at most 90 minutes of active effort. No accounts, purchases, installation, vendor contact or restricted access.
+- Review entry — Complete scenario accounting, evidence-supported scoring, explicit incomplete coverage, all 13 dispositions, launch recommendation and designated follow-up. End-to-end competitors' restricted workflows are optional unless needed for a specific future decision.
+- Fully verified scenario — All specified inputs and material checks exercised with attributable evidence. The current log has no fully verified scenarios. Hands-on in the TSV means partial coverage only.
+- Owner acceptance — Pending. Review entry establishes a preliminary planning baseline.

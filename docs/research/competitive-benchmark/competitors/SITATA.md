@@ -12,7 +12,7 @@ FAQ documents email-forwarded imports, offline saved details, trip tracking and 
 
 ## Observed access and functionality
 
-Consumer website rendered marketing and quote entry; separate app availability is evidenced by official distribution sources. Account and entitlement required for meaningful saved-trip/insurance testing are not established for every region. A regional UAE iOS listing describes one-time PIN sign-in and entry features; other regions and Android were not tested (SI06).
+Consumer website rendered marketing and quote entry; separate app availability is evidenced by official distribution sources. Account and entitlement required for meaningful saved-trip/insurance testing are not established for every region. A regional UAE iOS listing describes one-time PIN sign-in and entry features; other regions and Android were not tested (SI06). Reviewed public app illustration cards as vendor material (SI07).
 
 ## Commercial and privacy representations
 

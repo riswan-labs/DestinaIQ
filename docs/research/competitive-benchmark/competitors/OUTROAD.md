@@ -12,7 +12,7 @@ Promotes incident, risk and insight map layers, neighborhood assessment, scams a
 
 ## Observed access and functionality
 
-Rendered public map with Incidents, Safety and Insight controls. Signed-out search is advertised, saved destinations and alerts use an account. Matched neighborhood outputs are stated in the scenario log if retrieved. Mexico City search rendered a match, then map controls. Both target neighborhood names appeared as suggestions (OR04, OR05). Neighborhood detail was unverified.
+Rendered public map with Incidents, Safety and Insight controls. Signed-out search is advertised, saved destinations and alerts use an account. Matched neighborhood outputs are stated in the scenario log if retrieved. Mexico City search rendered a match, then map controls. Both target neighborhood names appeared as suggestions (OR04, OR05). In the follow-up, both names also appeared on the public map following the Safety-layer action. Dated or attributed neighborhood detail remained unverified (OR06).
 
 ## Commercial and privacy representations
 

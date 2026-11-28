@@ -203,7 +203,12 @@ def check_roadmap():
     progress = read("docs/engineering/PROGRESS.md")
     status = field(progress, "CP-0.1 status")
     research_status = field(progress, "Current checkpoint status")
-    assert research_status in {"In Progress", "Blocked"}, "CP-0.2 has no review or acceptance authorization"
+    assert research_status in {"In Progress", "Blocked", "Under Review"}, "CP-0.2 has no acceptance authorization"
+    if research_status == "Under Review":
+        benchmark = ROOT / "docs/research/competitive-benchmark"
+        methodology = (benchmark / "METHODOLOGY.md").read_text(encoding="utf-8")
+        assert "Review policy authorization — CP-0.2 Evidence Closure and Review Finalization, project-owner assignment" in methodology
+        assert (benchmark / "FOLLOW_UP.md").is_file()
     assert field(progress, "Current checkpoint") == "CP-0.2" and field(progress, "Current phase").startswith("Phase 0,")
     assert status == "Accepted", "CP-0.1 requires owner acceptance"
     assert field(progress, "Project-owner acceptance") == "Approved."

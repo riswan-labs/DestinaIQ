@@ -12,7 +12,7 @@ Seasonal atlas, forecasts, AQI, events, official-advisory guardrail and side-by-
 
 ## Observed access and functionality
 
-Public no-account browsing and demo-like landing pages. Observed Tokyo, Kyoto, Bali and Maldives climate sections. Published compare scope is two or three, even though S08 requests four. Chrome rendered a Bora-Bora suggestion and Dubai's advisory guardrail (TI11, TI12).
+Public no-account browsing and demo-like landing pages. Observed Tokyo, Kyoto, Bali and Maldives climate sections. Published compare scope is two or three, even though S08 requests four. Chrome rendered a Bora-Bora suggestion and Dubai's advisory guardrail (TI11, TI12). The follow-up rendered Bora Bora's sourced historical climate (TI15). A separate Tokyo/Kyoto control rendered a two-slot comparison and its uncertainty caveats (TI16).
 
 ## Commercial and privacy representations
 

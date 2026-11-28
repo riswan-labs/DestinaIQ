@@ -12,7 +12,7 @@ Vendor describes news and government advisory inputs, corroboration, derivative 
 
 ## Observed access and functionality
 
-Reviewed public product, plan, methodology and terms pages. Restricted competitor-output evaluation under published terms; retained no risk outputs or product scores. No monitoring or payment transaction attempted.
+Reviewed public product, plan, methodology and terms pages. Restricted competitor-output evaluation under published terms; retained no risk outputs or product scores. No monitoring or payment transaction attempted. The closure pass retained public documentation only. Vendor-approved output access remains optional for a future decision that requires it.
 
 ## Commercial and privacy representations
 

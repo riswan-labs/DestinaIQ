@@ -12,7 +12,7 @@ Advertises risk, weather, crowds, entry, dated trip fit, providers with credenti
 
 ## Observed access and functionality
 
-Rendered signed-out origin and destination form and account prompts. The linked India iOS listing describes a separate-looking home-services experience; Android is linked but travel delivery on the listed apps is unverified. The Dubai scan advanced to a progress view and remained in progress at last check (TG03, TG04).
+Rendered signed-out origin and destination form and account prompts. The linked India iOS listing describes a separate-looking home-services experience; Android is linked but travel delivery on the listed apps is unverified. The Dubai scan advanced to a progress view and was initially in progress (TG03, TG04). One follow-up completed the signed-out report with dates omitted (TG05).
 
 ## Commercial and privacy representations
 
