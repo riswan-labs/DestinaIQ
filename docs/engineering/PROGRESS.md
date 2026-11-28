@@ -1,8 +1,9 @@
 # Engineering progress
 
 - Current phase — Phase 0, Product & Engineering Readiness
-- Current checkpoint — CP-0.1
-- Status — Accepted
+- Current checkpoint — CP-0.2
+- Current checkpoint status — Accepted
+- CP-0.1 status — Accepted
 - Lifecycle — Not Started → In Progress → Under Review → Accepted. Blocked is available when progress cannot continue. Only the project owner can accept a checkpoint.
 - Pull request — [PR #1](https://github.com/riswan-labs/DestinaIQ/pull/1).
 - Documentation — Design and engineering baseline accepted.
@@ -14,15 +15,29 @@
 - Reviewed commit — bef820bbf3484c90acf260b724600b23cfb2c7e1.
 - Decisions — D20 and D21 approved. D01–D18 and D22 remain open, including D17 for deferred scope.
 - Final owner acceptance and merge authorization — Granted for PR #1 after required verification.
-- Next authorized action — Await the next assignment after the authorized PR #1 merge and synchronization. CP-0.2 has not started.
+- Next authorized action — Await the next owner assignment after the authorized PR #2 merge and synchronization. CP-0.3 has not started.
+
+## CP-0.2 owner acceptance
+
+- CP-0.2 project-owner acceptance — Approved.
+- CP-0.2 acceptance date — 2026-11-27.
+- CP-0.2 reviewed commit — cad78ba6e9b4019034010a3e7cf3bcbbf9abbd40.
+- CP-0.2 pull request — [PR #2](https://github.com/riswan-labs/DestinaIQ/pull/2).
+- CP-0.2 merge authorization — Granted for PR #2 after required verification.
+- CP-0.2 verification — Both verifiers passed. All 18 baseline and 14 competitive benchmark tests passed. Authoritative file preservation and whitespace checks passed. The staged-text credential scan found no matches.
+- Launch scope — [D23](../governance/DECISION_REGISTER.md#d23) approves retaining the 15 V1.0 capabilities without expansion, conditional on later validation.
+
+Under the [bounded research policy](../research/competitive-benchmark/METHODOLOGY.md#owner-authorized-evidence-closure), the owner accepted a preliminary evidence baseline. Coverage is six competitors, eight scenarios, 48 combinations, and 46 evidence records. There are zero fully verified scenarios, eight partial hands-on, eighteen documentation-only, eight restricted, and fourteen untested. There is no defensible overall ranking. Customer demand, willingness to pay, feasibility, economics and differentiation remain unvalidated.
+
+The owner accepted F01–F13 as planning dispositions. Specification or implementation authorization remains separate. D01 remains open for optional future competitive validation if a product decision requires it. The [follow-up register](../research/competitive-benchmark/FOLLOW_UP.md) assigns demand and customer value to CP-0.3, source feasibility and economics to CP-0.4, and privacy and safety to CP-0.8.
 
 ## Checkpoint inventory
 
-The approved baseline contains 13 engineering phases and 166 checkpoints. Phases 0–6 contain 90 checkpoints; Phases 7–12 contain 76. The [roadmap](ROADMAP.md) contains individual dependencies, acceptance criteria and status. CP-0.1 is Accepted. All subsequent checkpoints are Not Started.
+The approved baseline contains 13 engineering phases and 166 checkpoints. Phases 0–6 contain 90 checkpoints; Phases 7–12 contain 76. The [roadmap](ROADMAP.md) contains individual dependencies, acceptance criteria and status. CP-0.1 is Accepted. CP-0.2 is Accepted. Two checkpoints are Accepted. All checkpoints from CP-0.3 onward are Not Started.
 
 | Phase | Count | Status |
 | --- | --- | --- |
-| 0 | 9 | 1 Accepted; 8 Not Started |
+| 0 | 9 | 2 Accepted; 7 Not Started |
 | 1 | 11 | Not Started |
 | 2 | 12 | Not Started |
 | 3 | 15 | Not Started |

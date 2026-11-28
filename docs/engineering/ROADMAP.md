@@ -56,7 +56,7 @@ Phases group engineering work by domain. Explicit dependencies determine executi
 - Acceptance criteria — Record six comparable competitor attempts with dates, weighted evidence and access limitations.
 - Target product release — V1.0.
 - Exit gate — Record passing checkpoint evidence and obtain owner acceptance before dependent work.
-- Implementation status — Not Started.
+- Implementation status — Accepted.
 - FR primary — None directly assigned.
 - FR support — None directly assigned.
 - FR verification — None directly assigned.
