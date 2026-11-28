@@ -1,8 +1,8 @@
 # Engineering roadmap
 
-The owner-supplied inventory enumerates **166 checkpoints** across **13 phases**, with **90 in Phases 0–6** and **76 in Phases 7–12**. The assignment states 162 total. [D20](../governance/DECISION_REGISTER.md#d20) records the discrepancy and preserves all listed IDs. Implementation stays within the separately authorized checkpoint. Future checkpoints are Not Started.
+The owner-supplied inventory enumerates **166 checkpoints** across **13 phases**, with **90 in Phases 0–6** and **76 in Phases 7–12**. [D20](../governance/DECISION_REGISTER.md#d20) approves this inventory and the baseline of **80 FRs**, **14 NFRs** and **15 launch capabilities**. All listed IDs and titles are preserved. Implementation stays within the separately authorized checkpoint. Future checkpoints are Not Started.
 
-Phases group engineering work by domain. Explicit dependencies determine execution order. Release gates determine customer availability, including bounded slices of later-phase checkpoints. A phase label alone never changes a Design V3 release assignment. Review the [release reconciliation](../product/RELEASE_RECONCILIATION.md) before scheduling a slice.
+Phases group engineering work by domain. Explicit dependencies determine execution order. Release gates determine customer availability, including bounded slices of later-phase checkpoints. A phase label alone never changes a Design V3 release assignment. Review the [release reconciliation](../product/RELEASE_RECONCILIATION.md) before scheduling a slice. Cross-phase work requires explicit task-level authorization, verified dependencies and bounded pull request scope.
 
 ## Design V3 checkpoint crosswalk
 
@@ -3171,7 +3171,7 @@ Phases group engineering work by domain. Explicit dependencies determine executi
 
 - Objective — Advanced privacy-preserving personalization.
 - Dependencies — [CP-12.5](#cp-125), [CP-6.5](#cp-65)
-- Scope — Plan protected-document work only with D17 approval alongside advanced personalization.
+- Scope — Plan protected-document work only with D17 approval, security and privacy assessment, commercial justification and applicable release gates alongside advanced personalization.
 - Exclusions — Document storage or sharing before separate approval.
 - Deliverables — Privacy-preserving personalization and protected-document decision.
 - Acceptance criteria — Require separate D17 approval; if authorized, test vault encryption, sharing expiry and audit controls.
@@ -3190,7 +3190,7 @@ Phases group engineering work by domain. Explicit dependencies determine executi
 
 - Objective — Continuous platform maturity assessment.
 - Dependencies — [CP-12.6](#cp-126), [CP-12.11](#cp-1211), [CP-12.12](#cp-1212)
-- Scope — Review maturity and gated community groups, messages and meetups only with D17 approval.
+- Scope — Review maturity and gated community groups, messages and meetups only with D17 approval, security and privacy assessment, commercial justification and applicable release gates.
 - Exclusions — Community rollout before separate approval.
 - Deliverables — Platform maturity and deferred social decision.
 - Acceptance criteria — Require separate D17 approval; if authorized, verify membership, message restrictions, reporting and meetup privacy.

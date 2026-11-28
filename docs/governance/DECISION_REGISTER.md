@@ -1,6 +1,6 @@
 # Decision register
 
-D19 is **Approved by the project owner**. All other decisions below are **Open**. The checkpoint indicates the planned decision point or first validation gate. Resolution requires evidence and recorded approval. Reservation and commercialization decisions are prepared during discovery and resolved at their respective gates.
+D19, D20 and D21 are **Approved by the project owner**. D01–D18 and D22 remain **Open**. The checkpoint indicates the planned decision point or first validation gate. Resolution requires evidence and recorded approval. Reservation and commercialization decisions are prepared during discovery and resolved at their respective gates.
 
 | ID | Decision | Required evidence | Checkpoint |
 | --- | --- | --- | --- |
@@ -20,7 +20,7 @@ D19 is **Approved by the project owner**. All other decisions below are **Open**
 | D14 | Staffing, on-call and stewardship | Assign on-call, incident response, data stewardship and launch approval roles. | [CP-6.11](../engineering/ROADMAP.md#cp-611) |
 | D15 | AI providers, model/tool governance and launch evaluation thresholds | Approve processing terms, quality dataset, cost caps and policy thresholds. | [CP-5.14](../engineering/ROADMAP.md#cp-514) |
 | D16 | Partner, creator and distribution scope | Verify rights, contracts, moderation, dispute workflows and native demand. | [CP-11.11](../engineering/ROADMAP.md#cp-1111) |
-| D17 | Deferred document, sharing and community features | Obtain separate approval based on demand, threat model, lawful handling, access control and moderation. | [CP-12.12](../engineering/ROADMAP.md#cp-1212) |
+| D17 | Deferred document, sharing and community features | Require explicit owner authorization, security and privacy assessment, commercial justification and applicable release gates. Include lawful handling, access control and moderation evidence. | [CP-12.12](../engineering/ROADMAP.md#cp-1212) |
 | D18 | Backend coverage measurement and tooling | Agree enforcement metric and tools before implementation CI. | [CP-1.10](../engineering/ROADMAP.md#cp-110) |
 
 ## D19
@@ -29,12 +29,30 @@ D19 is **Approved by the project owner**. All other decisions below are **Open**
 
 ## D20
 
-**Open.** The assignment says 162 checkpoints and lists 166 unique IDs. Phases 0–6 contain 90 and Phases 7–12 contain 76. Preserve every listed ID and name. Owner confirmation is required before any count-driven removal, consolidation or renumbering.
+**Approved by the project owner.** The previous total of 162 was an arithmetic error. The corrected baseline is 13 engineering phases, 166 engineering checkpoints, 90 pre-launch checkpoints, 76 post-launch checkpoints, 80 functional requirements, 14 non-functional requirements and 15 launch capabilities. Every enumerated checkpoint ID and title is preserved.
 
 ## D21
 
-**Open.** Cross-phase release scheduling for FR-022, FR-025, FR-030, FR-050, FR-054, FR-055 and FR-056 requires confirmation. Retain authoritative releases and schedule constrained earlier/later slices as proposed in [reconciliation](../product/RELEASE_RECONCILIATION.md). For FR-067–072, the tentative planning homes are CP-12.12 and CP-12.13; D17 and separate scope approval remain prerequisites.
+**Approved by the project owner.** The [release reconciliation](../product/RELEASE_RECONCILIATION.md) records the approved slices.
+
+| Requirement | Approved customer-facing release |
+| --- | --- |
+| FR-022 Public destination Q&A | V1.1 |
+| FR-025 Offline trip summaries | V1.1 |
+| FR-030 Narrow locale and currency support | V1.1 |
+| FR-050 Advanced itinerary optimization | V1.2 |
+| FR-054 Moderated scam and disruption reporting | V1.3 |
+| FR-055 Optional traveler preferences | V1.1 |
+| FR-056 Printable intelligence reports | V1.1 |
+
+Engineering phase ownership does not override Design V3 release assignments. Cross-phase work requires explicit task-level authorization, verified dependencies and bounded pull request scope. This decision approves scheduling only.
 
 ## D22
 
 **Open.** Approve whether and when to expose billing and native mobile functionality. Earlier cost validation and commercial groundwork confer no customer release authorization. Record demand, scope, pricing, evidence and explicit owner approval.
+
+### Recommendations pending validation
+
+- Deliver a responsive web application first. Evaluate native iOS and Android separately at the distribution decision under D16 and D22.
+- Make cost metering, usage quotas and rate limiting mandatory launch controls as a planning recommendation. Validate their scope and thresholds at CP-0.4, CP-0.5 and CP-6.10. The design and thresholds remain subject to approval.
+- Enable payment processing and subscriptions only after unit economics are validated and D10 and D22 are approved. Validate provider licensing at CP-0.4, cloud selection at CP-0.5, and privacy obligations at CP-0.8 and CP-8.14.

@@ -1,6 +1,6 @@
 # Release strategy
 
-Design specification **v3.0** is the source baseline. Product releases **V1.0 through V3.0** are independent identifiers. The FR registry carries Design V3 §21 assignments as the planning baseline. Section 22 still requires validation and owner sign-off. Launch criteria follow [launch scope](LAUNCH_SCOPE.md). The release owner records evidence and signs each gate. Each release requires assigned acceptance tests, applicable controls, no critical security findings and a verified rollback plan. All release gates are pending. The [release reconciliation](RELEASE_RECONCILIATION.md) identifies cross-phase slices and open scheduling decisions. V1.0 gates exclude public Q&A and optional preferences. V1.1 requires the narrow Q&A, offline summary, printable report and locale/currency slices before release.
+Design specification **v3.0** is the source baseline. Product releases **V1.0 through V3.0** are independent identifiers. The FR registry carries Design V3 §21 assignments as the planning baseline. Section 22 still requires validation and owner sign-off. Launch criteria follow [launch scope](LAUNCH_SCOPE.md). The release owner records evidence and signs each gate. Each release requires assigned acceptance tests, applicable controls, no critical security findings and a verified rollback plan. All release gates are pending. The [release reconciliation](RELEASE_RECONCILIATION.md) identifies the seven approved cross-phase slices and deferred scope. V1.0 gates exclude public Q&A and optional preferences. V1.1 requires the narrow Q&A, offline summary, printable report and locale/currency slices before release.
 
 ## Gate V1.0
 
@@ -64,7 +64,7 @@ Cross-cutting controls [NFR-01](../engineering/TRACEABILITY.md#nfr-01), [NFR-02]
 
 ## Gate V3.0
 
-Advanced Intelligence. Predictions and partner rebooking. Deferred vault and social features require separate approval.
+Advanced Intelligence. Predictions and partner rebooking. Deferred vault and social features remain conditional on explicit owner authorization, security and privacy assessment, commercial justification and applicable release gates. They are outside the dependencies for earlier releases.
 
 Approve demand and risk case for deferred features. Verify calibration, drift, partner approval, encrypted deletion and community moderation before any authorized rollout.
 

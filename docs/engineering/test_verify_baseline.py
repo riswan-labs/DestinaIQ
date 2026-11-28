@@ -103,9 +103,21 @@ class BaselineVerificationTests(unittest.TestCase):
         )
         self.reject("Broken bidirectional mapping")
 
-    def test_undocumented_release_conflict(self):
-        self.edit(RECON, "| Open scheduling |", "| Approved |")
-        self.reject("Undocumented release conflict for FR-022")
+    def test_incorrect_scheduling_approval(self):
+        self.edit(RECON, "| Approved scheduling (D21) |", "| Approved |")
+        self.reject("Incorrect scheduling approval for FR-022")
+
+    def test_incorrect_approved_checkpoint_total(self):
+        self.edit("docs/governance/DECISION_REGISTER.md", "166 engineering checkpoints", "162 engineering checkpoints")
+        self.reject("Incorrect approved baseline")
+
+    def test_reopened_scheduling_decision(self):
+        self.edit(
+            "docs/governance/DECISION_REGISTER.md",
+            "## D21\n\n**Approved by the project owner.**",
+            "## D21\n\n**Open.**",
+        )
+        self.reject("Incorrect approval status for D21")
 
     def test_missing_nonfunctional_verification(self):
         self.edit(

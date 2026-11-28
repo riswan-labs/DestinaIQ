@@ -205,6 +205,8 @@ def check_roadmap():
     assert field(progress, "Current checkpoint") == "CP-0.1" and field(progress, "Current phase").startswith("Phase 0,")
     assert status in {"In Progress", "Under Review"}, "CP-0.1 requires owner acceptance"
     assert field(progress, "Project-owner acceptance") == "Pending."
+    assert field(progress, "Final owner acceptance and merge authorization") == "Pending."
+    assert "D20 and D21 approved. D01–D18 and D22 remain open" in field(progress, "Decisions")
     assert field(progress, "Application implementation") == "Not Started."
     assert field(progress, "Application automated verification") == "Pending."
     assert field(progress, "Documentation verification").startswith(
@@ -236,8 +238,28 @@ def check_traceability(source, launches):
     index = rows(trace.split("## Non-functional register")[0], r"^\[(FR-\d{3})\]")
     recon = rows(read("docs/product/RELEASE_RECONCILIATION.md"), r"^\[(FR-\d{3})\]")
     decisions = read("docs/governance/DECISION_REGISTER.md")
-    assert "## D19\n\n**Approved by the project owner.**" in decisions
-    assert all(f"## {decision}\n\n**Open.**" in decisions for decision in ("D20", "D21", "D22"))
+    decision_sections = blocks(decisions, r"^## (D\d{2})$")
+    assert set(decision_sections) == {"D19", "D20", "D21", "D22"}
+    for decision in ("D19", "D20", "D21"):
+        assert decision_sections[decision].lstrip().startswith("**Approved by the project owner.**"), (
+            f"Incorrect approval status for {decision}"
+        )
+    assert decision_sections["D22"].lstrip().startswith("**Open.**")
+    decision_rows = rows(decisions, r"^(D\d{2})$")
+    assert set(decision_rows) == {f"D{i:02}" for i in range(1, 19)}
+    assert "D01–D18 and D22 remain **Open**." in decisions
+    deferred_conditions = "explicit owner authorization, security and privacy assessment, commercial justification and applicable release gates"
+    assert deferred_conditions in decision_rows["D17"][2]
+    for fact in (
+        f"{len(CHECKPOINT_COUNTS)} engineering phases", f"{sum(CHECKPOINT_COUNTS)} engineering checkpoints",
+        f"{sum(CHECKPOINT_COUNTS[:7])} pre-launch checkpoints", f"{sum(CHECKPOINT_COUNTS[7:])} post-launch checkpoints",
+        f"{len(source)} functional requirements", f"{len(controls)} non-functional requirements",
+        f"{len(launches)} launch capabilities",
+    ):
+        assert fact in decision_sections["D20"], f"Incorrect approved baseline: {fact}"
+    assert all(phrase in decision_sections["D21"] for phrase in (
+        "explicit task-level authorization", "verified dependencies", "bounded pull request scope",
+    ))
     assert set(requirements) == set(source) == {f"FR-{i:03}" for i in range(1, 81)}
     assert set(index) == set(recon) == set(source), "Missing FR table mappings"
     assert set(gates) == set(RELEASES)
@@ -261,7 +283,12 @@ def check_traceability(source, launches):
     fr_dependencies = {}
     release_counts = Counter()
     mapped = {}
-    open_conflicts = {"FR-022", "FR-025", "FR-030", "FR-050", "FR-054", "FR-055", "FR-056"}
+    approved_slices = {
+        "FR-022": "V1.1", "FR-025": "V1.1", "FR-030": "V1.1", "FR-050": "V1.2",
+        "FR-054": "V1.3", "FR-055": "V1.1", "FR-056": "V1.1",
+    }
+    approved_rows = rows(decision_sections["D21"], r"^(FR-\d{3}) ")
+    assert {req: cells[1] for req, cells in approved_rows.items()} == approved_slices
     deferred = {f"FR-{n:03}" for n in range(67, 73)}
     for req, (title, release, criterion) in source.items():
         body = requirements[req]
@@ -298,9 +325,14 @@ def check_traceability(source, launches):
         assert recon[req][1] == recon[req][3] == release, f"Inconsistent reconciliation release for {req}"
         assert links(CHECKPOINT_LINK, recon[req][2]) == primary and len(recon[req]) == 7
         assert all(recon[req][4:])
-        if req in open_conflicts | deferred:
-            expected = "Open scheduling" if req in open_conflicts else "Open scope"
-            assert recon[req][6] == expected and "D21" in recon[req][5], f"Undocumented release conflict for {req}"
+        if req in approved_slices:
+            assert release == approved_slices[req] and recon[req][6] == "Approved scheduling (D21)", (
+                f"Incorrect scheduling approval for {req}"
+            )
+        if req in deferred:
+            assert release == "V3.0" and recon[req][6] == "Open scope" and "D17" in recon[req][5]
+            assert deferred_conditions in recon[req][5]
+            assert (primary | verification).isdisjoint(set().union(*(readiness[r] for r in RELEASES[:-1])))
         release_counts[release] += 1
 
     check_dependencies(fr_dependencies, "FR")
@@ -341,7 +373,7 @@ def check_traceability(source, launches):
             )
 
     print("80 FRs with primary, supporting and verification mappings; 14 NFRs with implementation and verification mappings")
-    print("15 launch capabilities, six source release gates, seven open cross-phase FRs and six deferred scope FRs")
+    print("15 launch capabilities, six source release gates, seven approved cross-phase FRs and six deferred scope FRs")
     print("Release counts " + ", ".join(f"{release}={count}" for release, count in sorted(release_counts.items())))
 
 

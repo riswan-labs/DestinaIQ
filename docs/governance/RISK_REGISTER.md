@@ -18,4 +18,4 @@ All risks are **Open**. Owner roles are proposed for confirmation. The [decision
 
 | R12 | Cross-phase slices miss authoritative customer release gates | Sequence slices using explicit dependencies and verify release boundaries against the reconciliation table. | Product and engineering | D21, D22 |
 | R13 | Public repository exposes restricted data | Run required scans, use synthetic fixture data, review artifacts and route incidents privately. | Security | D19 |
-| R14 | Conflicting inventory total leads to silent scope removal | Keep all 166 enumerated IDs and obtain clarification before changing the inventory. | Project owner | D20 |
+| R14 | Unapproved changes to the approved checkpoint inventory | D20 resolves the arithmetic discrepancy. Preserve the 166 approved IDs and titles and seek approval for any inventory change. | Project owner | D20 |

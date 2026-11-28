@@ -5,12 +5,13 @@
 - Status — Under Review
 - Lifecycle — Not Started → In Progress → Under Review → Accepted. Blocked is available when progress cannot continue. Only the project owner can accept a checkpoint.
 - Pull request — [Draft PR #1](https://github.com/riswan-labs/DestinaIQ/pull/1).
-- Documentation — Remediation complete and available in Draft PR #1.
+- Documentation — Finalization complete and available in Draft PR #1.
 - Application implementation — Not Started.
 - Documentation verification — Passed byte-level DOCX and source transcription comparison, checkpoint and release-graph checks, bidirectional traceability and link verification. The verifier suite passed one unchanged-baseline case and 15 isolated negative cases.
 - Application automated verification — Pending.
 - Project-owner acceptance — Pending.
-- Outstanding decisions — [D20](../governance/DECISION_REGISTER.md#d20) covers the stated count. [D21](../governance/DECISION_REGISTER.md#d21) and [D22](../governance/DECISION_REGISTER.md#d22) cover release sequencing, gated scope and commercial decisions.
+- Decisions — D20 and D21 approved. D01–D18 and D22 remain open, including D17 for deferred scope.
+- Final owner acceptance and merge authorization — Pending.
 - Next authorized action — Await independent project-owner review. CP-0.2 has not started.
 
 ## Checkpoint inventory
