@@ -37,7 +37,7 @@ Phases group engineering work by domain. Explicit dependencies determine executi
 - Acceptance criteria — Verify byte identity, 80 FRs, 14 NFRs, 15 launch mappings and the checkpoint graph; publish the existing draft.
 - Target product release — V1.0.
 - Exit gate — Publish verified documentation in Draft PR #1 and obtain owner acceptance.
-- Implementation status — Under Review.
+- Implementation status — Accepted.
 - FR primary — None directly assigned.
 - FR support — None directly assigned.
 - FR verification — None directly assigned.

@@ -2,25 +2,27 @@
 
 - Current phase — Phase 0, Product & Engineering Readiness
 - Current checkpoint — CP-0.1
-- Status — Under Review
+- Status — Accepted
 - Lifecycle — Not Started → In Progress → Under Review → Accepted. Blocked is available when progress cannot continue. Only the project owner can accept a checkpoint.
-- Pull request — [Draft PR #1](https://github.com/riswan-labs/DestinaIQ/pull/1).
-- Documentation — Finalization complete and available in Draft PR #1.
+- Pull request — [PR #1](https://github.com/riswan-labs/DestinaIQ/pull/1).
+- Documentation — Design and engineering baseline accepted.
 - Application implementation — Not Started.
-- Documentation verification — Passed byte-level DOCX and source transcription comparison, checkpoint and release-graph checks, bidirectional traceability and link verification. The verifier suite passed one unchanged-baseline case and 15 isolated negative cases.
+- Documentation verification — Passed the full baseline verifier and all 18 verifier tests (one unchanged-baseline case and 17 negative cases). The original DOCX matched byte for byte. Verified the source transcription, 332 acyclic dependency edges, all A–N mappings and release gates, 80 FRs, 14 NFRs, 15 launch capabilities, and internal links. Git whitespace and authoritative file checks passed. The staged-text secret scan returned no matches.
 - Application automated verification — Pending.
-- Project-owner acceptance — Pending.
+- Project-owner acceptance — Approved.
+- Acceptance date — 2026-11-27.
+- Reviewed commit — bef820bbf3484c90acf260b724600b23cfb2c7e1.
 - Decisions — D20 and D21 approved. D01–D18 and D22 remain open, including D17 for deferred scope.
-- Final owner acceptance and merge authorization — Pending.
-- Next authorized action — Await independent project-owner review. CP-0.2 has not started.
+- Final owner acceptance and merge authorization — Granted for PR #1 after required verification.
+- Next authorized action — Await the next assignment after the authorized PR #1 merge and synchronization. CP-0.2 has not started.
 
 ## Checkpoint inventory
 
-The 166 enumerated checkpoints replace the previous 25. Phases 0–6 contain 90 checkpoints; Phases 7–12 contain 76. The [roadmap](ROADMAP.md) contains individual dependencies, acceptance criteria and status. CP-0.1 is the only active checkpoint. All subsequent checkpoints are Not Started.
+The approved baseline contains 13 engineering phases and 166 checkpoints. Phases 0–6 contain 90 checkpoints; Phases 7–12 contain 76. The [roadmap](ROADMAP.md) contains individual dependencies, acceptance criteria and status. CP-0.1 is Accepted. All subsequent checkpoints are Not Started.
 
 | Phase | Count | Status |
 | --- | --- | --- |
-| 0 | 9 | 1 Under Review; 8 Not Started |
+| 0 | 9 | 1 Accepted; 8 Not Started |
 | 1 | 11 | Not Started |
 | 2 | 12 | Not Started |
 | 3 | 15 | Not Started |
@@ -33,3 +35,29 @@ The 166 enumerated checkpoints replace the previous 25. Phases 0–6 contain 90 
 | 10 | 14 | Not Started |
 | 11 | 11 | Not Started |
 | 12 | 13 | Not Started |
+
+## Open decisions and validation checkpoints
+
+See the [decision register](../governance/DECISION_REGISTER.md) for evidence and approval criteria.
+
+| Decision | Designated validation checkpoint |
+| --- | --- |
+| D01 · Hands-on competitor benchmark | [CP-0.2](../engineering/ROADMAP.md#cp-02) |
+| D02 · Customer discovery and product hypotheses | [CP-0.3](../engineering/ROADMAP.md#cp-03) |
+| D03 · Initial destination coverage and launch sign-off | [CP-0.3](../engineering/ROADMAP.md#cp-03) |
+| D04 · Provider licensing and attribution | [CP-0.4](../engineering/ROADMAP.md#cp-04) |
+| D05 · Commercial API costs and provider selection | [CP-0.4](../engineering/ROADMAP.md#cp-04) |
+| D06 · AWS versus Azure | [CP-0.5](../engineering/ROADMAP.md#cp-05) |
+| D07 · Data retention and deletion policy | [CP-0.8](../engineering/ROADMAP.md#cp-08) |
+| D08 · Reservation import privacy and OAuth | [CP-8.14](../engineering/ROADMAP.md#cp-814) |
+| D09 · Trademark, domain and app-store name clearance | [CP-0.9](../engineering/ROADMAP.md#cp-09) |
+| D10 · Pricing, unit economics and monetization | [CP-11.11](../engineering/ROADMAP.md#cp-1111) |
+| D11 · Production SLO and workload | [CP-6.3](../engineering/ROADMAP.md#cp-63) |
+| D12 · Coverage thresholds, geographic precision and rankings | [CP-3.15](../engineering/ROADMAP.md#cp-315) |
+| D13 · Safety liability and correction ownership | [CP-0.8](../engineering/ROADMAP.md#cp-08) |
+| D14 · Staffing, on-call and stewardship | [CP-6.11](../engineering/ROADMAP.md#cp-611) |
+| D15 · AI providers, model/tool governance and launch evaluation thresholds | [CP-5.14](../engineering/ROADMAP.md#cp-514) |
+| D16 · Partner, creator and distribution scope | [CP-11.11](../engineering/ROADMAP.md#cp-1111) |
+| D17 · Deferred document, sharing and community features | [CP-12.12](../engineering/ROADMAP.md#cp-1212) |
+| D18 · Backend coverage measurement and tooling | [CP-1.10](../engineering/ROADMAP.md#cp-110) |
+| D22 · Billing and native delivery | CP-6.10 (cost validation), CP-11.11 (commercial and distribution review) |

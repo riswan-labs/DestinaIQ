@@ -203,14 +203,23 @@ def check_roadmap():
     progress = read("docs/engineering/PROGRESS.md")
     status = field(progress, "Status")
     assert field(progress, "Current checkpoint") == "CP-0.1" and field(progress, "Current phase").startswith("Phase 0,")
-    assert status in {"In Progress", "Under Review"}, "CP-0.1 requires owner acceptance"
-    assert field(progress, "Project-owner acceptance") == "Pending."
-    assert field(progress, "Final owner acceptance and merge authorization") == "Pending."
+    assert status in {"In Progress", "Under Review", "Accepted"}, "CP-0.1 requires owner acceptance"
+    if status == "Accepted":
+        assert field(progress, "Project-owner acceptance") == "Approved."
+        assert field(progress, "Acceptance date") == "2026-11-27."
+        assert field(progress, "Reviewed commit") == "bef820bbf3484c90acf260b724600b23cfb2c7e1."
+        assert field(progress, "Pull request") == "[PR #1](https://github.com/riswan-labs/DestinaIQ/pull/1)."
+        assert field(progress, "Final owner acceptance and merge authorization") == (
+            "Granted for PR #1 after required verification."
+        )
+    else:
+        assert field(progress, "Project-owner acceptance") == "Pending."
+        assert field(progress, "Final owner acceptance and merge authorization") == "Pending."
     assert "D20 and D21 approved. D01–D18 and D22 remain open" in field(progress, "Decisions")
     assert field(progress, "Application implementation") == "Not Started."
     assert field(progress, "Application automated verification") == "Pending."
     assert field(progress, "Documentation verification").startswith(
-        "Passed" if status == "Under Review" else "Pending"
+        "Pending" if status == "In Progress" else "Passed"
     ), "Documentation verification conflicts with checkpoint status"
     counts = rows(progress, r"^(\d+)$")
     assert set(counts) == set(phases), "Progress tracker phase inventory differs"
