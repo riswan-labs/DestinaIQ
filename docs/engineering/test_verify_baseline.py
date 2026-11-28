@@ -136,7 +136,11 @@ class BaselineVerificationTests(unittest.TestCase):
         self.reject("V1.0 depends on later-release checkpoint CP-5.4")
 
     def test_unauthorized_progress(self):
-        self.edit(ROADMAP, "- Implementation status — Not Started.", "- Implementation status — Accepted.")
+        for status in ("In Progress", "Blocked"):
+            field = f"- Implementation status — {status}."
+            if field in (self.root / ROADMAP).read_text(encoding="utf-8"):
+                self.edit(ROADMAP, field, "- Implementation status — Accepted.")
+                break
         self.reject("Incorrect implementation status for CP-0.2")
 
 
